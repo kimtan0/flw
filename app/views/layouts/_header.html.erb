@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-xl navbar-dark navbar-custom h3-homepage">
+  <%= link_to (image_tag 'tLogo.svg', class: 'navbar-logo'), root_path, class: "navbar-brand ml-sm-4" %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="d-none d-xl-block w-100">
+    <div class="d-flex justify-content-end">
+      <div class="row nav-link-container text-left mr-1">
+        <div class="col-3">
+          <%= link_to "Browse Projects", "https://facebook.com", class: "nav-link link-hover-color" %>
+        </div>
+        <div class="col-3">
+          <%= link_to "Post Projects", "https://facebook.com", class: "nav-link link-hover-color" %>
+        </div>
+        <div class="col-3">
+          <%= link_to "Sign Up", "https://facebook.com", class: "nav-link link-hover-color" %>
+        </div>
+        <div class="col-3 nav-btn-login">
+          <%= link_to "Login", login_path, class: "btn btn-success ml-4 px-5 h3-homepage", id: "button-login" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <%= link_to "Browse Projects", "https://facebook.com", class: "nav-link link-hover-color" %>
+      </li>
+      <li class="nav-item active links">
+        <%= link_to "Post Projects", "https://facebook.com", class: "nav-link link-hover-color" %>
+      </li>
+      <li class="nav-item active"> 
+        <%= link_to "Sign Up", "https://facebook.com", class: "nav-link link-hover-color" %>
+      </li>
+      <li class="nav-item nav-btn-login">
+        <%= link_to "Login", "https://facebook.com", class: "btn btn-success ml-4 px-5 h3-homepage", id: "button-login" %>
+      </li>
+    </ul>
+  </div>
+</nav>

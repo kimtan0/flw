@@ -1,0 +1,119 @@
+nav.navbar.navbar-expand-xl.navbar-dark.navbar-job.h3-homepage.sub-header-font style="background-color:#7af2ba"
+  .d-none.d-xl-block.w-100
+    .d-flex.justify-content-center
+      .row.sub-header-width.text-left
+        .col-2.pl-0
+          = link_to "Programming", "https://facebook.com", class: "nav-link pl-0 link-hover-color"
+        .col-2
+          = link_to "Design", "https://facebook.com", class: "nav-link pl-0 link-hover-color"
+        .col-2
+          = link_to "Business", "https://facebook.com", class: "nav-link pl-0 text-left link-hover-color"
+        .col-2.pr-0
+          = link_to "Marketing", "https://facebook.com", class: "nav-link pr-0 text-center link-hover-color"
+        .col-2.pr-0
+          = link_to "Finance", "https://facebook.com", class: "nav-link pr-0 text-center link-hover-color"
+        .col-2.pr-0
+          = link_to "Education & Training", "https://facebook.com", class: "nav-link pr-0 text-right link-hover-color"
+  button.navbar-toggler.sub-header-toggler.w-100.text-left.sub-header-button.py-2 type="button" data-toggle="collapse" data-target="#subHeaderContent" aria-controls="subHeaderContent" aria-expanded="false" aria-label="Toggle navigation" 
+    span.h3-homepage.sub-header-font
+      | Browse By Category
+      = image_tag('chevron-down.svg', class:"ml-2")
+  .collapse.navbar-collapse.text-center id="subHeaderContent"
+    ul.navbar-nav.ml-auto
+      li.nav-item.active
+        = link_to "Programming", "https://facebook.com", class: "nav-link link-hover-color"
+      li.nav-item.active.links
+        = link_to "Design", "https://facebook.com", class: "nav-link link-hover-color"
+      li.nav-item.active 
+        = link_to "Business", "https://facebook.com", class: "nav-link link-hover-color"
+      li.nav-item.active 
+        = link_to "Marketing", "https://facebook.com", class: "nav-link link-hover-color"
+      li.nav-item.active 
+        = link_to "Finance", "https://facebook.com", class: "nav-link link-hover-color"
+      li.nav-item.active 
+        = link_to "Education & Training", "https://facebook.com", class: "nav-link"
+.w-100
+  .table.mb-0
+    .row.row-homepage
+      .col-0.col-lg-2
+      .col-12.col-lg-8
+        .d-flex.justify-content-center.p-0
+          .table.mb-0
+            .row.row-homepage
+              .col-12.text-right.p-0
+                .carousel.slide.p-0#carouselExampleIndicators data-ride="carousel"
+                  .carousel-inner
+                    .carousel-item.active
+                      = image_tag('business.jpg', class:"d-block w-100") 
+                    .carousel-item
+                      = image_tag('design.jpg', class:"d-block w-100")
+                    .carousel-item
+                      = image_tag('education.jpg', class:"d-block w-100")
+                    .carousel-item
+                      = image_tag('finance.jpg', class:"d-block w-100")
+                    .carousel-item
+                      = image_tag('programming.jpg', class:"d-block w-100")
+                  a.carousel-control-prev data-slide="prev" href="#carouselExampleIndicators" role="button" 
+                    span.carousel-control-prev-icon.align-middle aria-hidden="true" 
+                    span.sr-only Previous
+                  a.carousel-control-next data-slide="next" href="#carouselExampleIndicators" role="button" 
+                    span.carousel-control-next-icon aria-hidden="true" 
+                    span.sr-only Next
+      .col-0.col-lg-2
+.w-100.d-flex.justify-content-center style="background-color: #f1fdf7"
+  .sub-header-width
+    .h2-homepage.mt-5 Why us
+    .table.mb-0.mt-3.mt-md-4.mt-xl-5
+      .row.row-homepage
+
+        .col-12.col-xl-5.mb-3.mb-md-4.mb-lg-5
+          .d-flex.justify-content-start.align-items-center.details-col style="background-color:white"
+            .profile-picture
+              div
+                = image_tag("handshake-icon.png", style:"width: 100%; height: 100%; padding: 0; object-fit: cover")
+            .row-row-homepage
+              .col
+                p.h1-dashboard.mb-0.index-why-us-header Post Projects
+          .d-flex.justify-content-start.align-items-center.details-col style="background-color:white"
+            .row-row-homepage
+              .col
+                p.h3-homepage.sub-header-font.index-why-us-details Posting a project has never been easier. The right freelancer will begin working on your project within minutes.
+        .col-0.col-xl-2
+        .col-12.col-xl-5.mb-3.mb-md-4.mb-lg-5
+          .d-flex.justify-content-start.align-items-center.details-col style="background-color:white"
+            .profile-picture
+              div
+                = image_tag("freelancer-icon.png", style:"width: 100%; height: 100%; padding: 0; object-fit: cover")
+            .row-row-homepage
+              .col
+                p.h1-dashboard.mb-0.index-why-us-header Search Freelancers
+          .d-flex.justify-content-start.align-items-center.details-col style="background-color:white"
+            .row-row-homepage
+              .col
+                p.h3-homepage.sub-header-font.index-why-us-details Looking for someone with specific talent? You can search for freelancers from all sorts of background.
+
+        .col-12.col-xl-5.mb-3.mb-md-4.mb-lg-5
+          .d-flex.justify-content-start.align-items-center.details-col style="background-color:white"
+            .profile-picture
+              div
+                = image_tag("progress-icon.png", style:"width: 100%; height: 100%; padding: 0; object-fit: cover")
+            .row-row-homepage
+              .col
+                p.h1-dashboard.mb-0.index-why-us-header Track Progress
+          .d-flex.justify-content-start.align-items-center.details-col style="background-color:white"
+            .row-row-homepage
+              .col
+                p.h3-homepage.sub-header-font.index-why-us-details Always stay up-to-date with your project's progress. Keep up-to-date information on project's milestones.
+        .col-0.col-xl-2
+        .col-12.col-xl-5.mb-3.mb-md-4.mb-lg-5
+          .d-flex.justify-content-start.align-items-center.details-col style="background-color:white"
+            .profile-picture
+              div
+                = image_tag("money-icon.png", style:"width: 100%; height: 100%; padding: 0; object-fit: cover")
+            .row-row-homepage
+              .col
+                p.h1-dashboard.mb-0.index-why-us-header Secure Payment
+          .d-flex.justify-content-start.align-items-center.details-col style="background-color:white"
+            .row-row-homepage
+              .col
+                p.h3-homepage.sub-header-font.index-why-us-details All payments are monitored by our website. You will only pay for projects or milestone when you are satisfied.

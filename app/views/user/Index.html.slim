@@ -1,0 +1,9 @@
+- flash.each do |type, msg|
+  -if type == "notice" 
+    .alert.alert-danger.mt-4
+      = msg
+  -else
+    .alert.alert-success.mt-4
+      = msg
+h1 User#Index
+p Find me in app/views/user/Index.html.slim

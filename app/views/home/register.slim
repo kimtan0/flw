@@ -1,0 +1,60 @@
+- flash.each do |type, msg|
+  -if type == "notice" 
+    .alert.alert-danger.mt-4
+      = msg
+  -else
+    .alert.alert-success.mt-4
+      = msg
+= form_for @user, html:{class:'d-flex flex-column min-vh-100 justify-content-center align-items-center'}, url: home_index_path, method: "POST" do |f|
+  .w-100.mb-5
+    .row.row-homepage
+      .col-2.col-sm-3
+      .col-8.col-sm-6.p-4.p-sm-5.p-lg-4.p-xl-5.pb-0.pb-sm-0.pb-lg-4.pb-xl-5
+        .table.mb-0.d-flex.justify-content-center.align-items-center
+          .row.row-homepage style="vertical-align:middle"
+            .col-12.mb-3.mb-sm-4.mb-lg-5
+              h1.h2-homepage.pl-0.pb-0#login-header style="text-align:center" Register an account.
+            .col-12
+              .row.row-homepage.p-0
+                .col-12.col-sm-6.pr-sm-2
+                  .input-group
+                    = f.text_field :first_name, required: true, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "First name"
+                .col-12.col-sm-6.pl-sm-2
+                  .input-group
+                    = f.text_field :last_name, required: true, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Last name"
+                .col-12
+                  .input-group
+                    = f.email_field :email, required: true, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Enter your email"
+                .col-12
+                  .input-group
+                    = password_field_tag "password", nil, required: true, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Enter your password" 
+                .col-12
+                  .input-group
+                    = password_field_tag "confirm_password", nil, required: true, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Confirm your password"
+                .col-12
+                  .input-group
+                    = number_field_tag "phone_number", @phone, min:1, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Phone Number"
+                .col-12
+                  .input-group
+                    = f.text_area :address, required: true, cols:10, rows:5 ,class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Address"
+                .col-12.col-sm-6.pr-sm-2
+                  .input-group
+                    = f.number_field :postcode, required: true, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Postcode"
+                .col-12.col-sm-6.pl-sm-2
+                  .input-group
+                    = f.select :country, options_for_select(countries, :selected => 0), {prompt: "Country"}, class: "form-control form-control-lg p-homepage mb-sm-3 custom-select checkout-input", style: "border-radius:12px"
+                .col-12
+                  .input-group
+                    = select_tag "role", raw("<option>Freelancer</option><option>Employer</option>"), prompt: "Role", class: "form-control form-control-lg p-homepage mb-sm-3 custom-select checkout-input", style: "border-radius:12px"
+              .row.row-homepage.mt-0.mt-sm-4
+                .col-12.col-sm-6.pt-2.pt-sm-3.d-flex.justify-content-center.justify-content-sm-start.align-items-center
+                  = link_to "Already have an account ?", login_path, {class:"register-link"}
+                .col-12.col-sm-6.d-flex.justify-content-center.justify-content-sm-end.align-items-center
+                  = f.submit "Register", class: 'btn btn-dark btn-outline-secondary h3-homepage px-5 px-md-4 px-sm-4 py-sm-2 mt-3 mt-sm-2 login-button-font', style: 'border-radius: 12px; color: white;'
+      .col-2.col-sm-3
+javascript:
+  $(function() {
+    setTimeout(function(){
+      $('.alert').slideUp(500);
+    }, 2000);
+  });
