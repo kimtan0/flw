@@ -1,0 +1,51 @@
+.d-flex.flex-column.min-vh-100.justify-content-center.align-items-center 
+  .w-100.mb-5
+    .row.row-homepage
+      .col-2.col-sm-3
+      .col-8.col-sm-6.p-4.p-sm-5.p-lg-4.p-xl-5.pb-0.pb-sm-0.pb-lg-4.pb-xl-5
+        .table.mb-0.d-flex.justify-content-center.align-items-center
+          .row.row-homepage style="vertical-align:middle"
+            .col-12.mb-3.mb-sm-4.mb-lg-5
+              h1.h2-homepage.pl-0.pb-0#login-header style="text-align:center" Complete Project Confirmation 
+              p.h3-homepage.mt-5 Are you certain 100% of the project has been completed and submitted to the project owner? A penalty will be incurred on your behalf if the project was found to be incomplete. Are you sure this project has been completed?
+              .d-flex.flex-column.justify-content-center.align-items-center
+                .row 
+                  .col-6
+                    button.btn.h3-homepage.px-3.px-md-5.py-3.py-md-3.mt-3.mr-2#email-submit style="border-radius: 12px; color: white; background-color:#80d144" type="button" data-toggle="modal" Confirm
+                  .col-6
+                    = link_to 'Back', accepted_project_details_path, class: 'btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3 mr-2', style: 'border-radius: 12px; color: white; background-color:#80d144'                  
+      .col-2.col-sm-3
+button#btn-email-modal style="display: none;" type="button" data-toggle="modal"  data-target="#emailSubmitModal"
+.modal.fade#emailSubmitModal style="z-index:1060;" role="dialog" aria-labelledby="emailSubmitModalLabel" aria-hidden="true"
+  .modal-dialog.modal-xl role="document"
+    .modal-content 
+      .modal-header style="border: none;"
+        button.close.h2-homepage type="button" data-dismiss="modal" aria-label="Close" X
+      .modal-body
+        .container-fluid.container-modal
+          .row
+            .col-12 
+              h1.h2-homepage How was your experience with the project owner?
+              .d-flex.justify-content-center.align-items-center
+                = simple_form_for :complete, url: complete_path, method: "POST" do |f|
+                  .row
+                    .col-12
+                      .rate
+                        input type="radio" id="star5" name="rate" value="5"
+                        label for="star5" title="text" 5 stars
+                        input type="radio" id="star4" name="rate" value="4"
+                        label for="star4" title="text" 4 stars
+                        input type="radio" id="star3" name="rate" value="3"
+                        label for="star3" title="text" 3 stars
+                        input type="radio" id="star2" name="rate" value="2"
+                        label for="star2" title="text" 2 stars
+                        input type="radio" id="star1" name="rate" value="1"
+                        label for="star1" title="text" 1 star
+                    .col-12
+                      = f.submit "Confirm", data: { confirm: 'Are you certain this project has been completed?' }, class: "btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3 mr-2", style:"border-radius: 12px; color: white; background-color:#80d144"
+
+javascript:
+  $('#email-submit').click(function() {
+    $('#btn-email-modal').trigger('click');
+  });
+

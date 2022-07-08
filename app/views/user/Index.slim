@@ -1,0 +1,56 @@
+.w-100
+  - flash.each do |type, msg|
+    -if type == "notice" 
+      .alert.alert-danger.mt-4
+        = msg
+    -else 
+      .alert.alert-success.mt-4
+        = msg
+.w-100.mt-0.mt-xl-5
+  .d-flex.justify-content-center
+    .row.sub-header-width.text-left
+      .col-0.col-xl-3
+        .d-none.d-xl-block
+          = simple_form_for :search, url: user_Index_path, method: "GET" do |f|
+            = f.input :PC, label: "Project Category",  collection: project_category, as: :check_boxes
+            = f.input :PDC, label: "Project Detailed Category", collection: all_detailed_category, as: :check_boxes 
+            = f.submit "Search", class: "btn btn-primary m" 
+            = link_to "Reset", user_Index_path, class: "ml-2"
+        .d-xl-none
+          button.navbar-toggler.sub-header-toggler.w-100.text-left.sub-header-button.py-2 type="button" data-toggle="collapse" data-target="#subHeaderContent" aria-controls="subHeaderContent" aria-expanded="false" aria-label="Toggle navigation" style="background-color:#7af2ba"
+            span.h3-homepage.sub-header-font style="color:#f0f0f0"
+              | Filter
+              = image_tag('chevron-down.svg', class:"ml-2")
+        .collapse.navbar-collapse.text-left id="subHeaderContent"
+          = simple_form_for :search, url: user_Index_path, method: "GET" do |f|
+            = f.input :PC, label: "Project Category",  collection: project_category, as: :check_boxes
+            = f.input :PDC, label: "Project Detailed Category", collection: all_detailed_category, as: :check_boxes 
+            = f.submit "Search", class: "btn btn-primary m" 
+            = link_to "Reset", user_Index_path, class: "ml-2"
+      .col-12.col-xl-9
+        .row
+          - @project.each_with_index do |project, i|
+            - user = User.find(project.project_owner_id)
+            - if i.even?
+              .col-1
+            .col-12.col-sm-5.mb-5.mx-2.d-flex.justify-content-center.align-item-center
+              .card.card-project-width.border-dark 
+                = link_to project_details_path(project.id), style:"text-decoration: none; color: black"
+                  = image_tag (project.avatar), class:"card-img-top"
+                  .card-body
+                    .h2-homepage.dashboard-skin-content.project-title.card-title.mb-5 = project.project_name
+                    .row
+                      .col-6
+                        p.card-text = user.first_name
+                      .col-6
+                        p.font-weight-bold.card-text.text-right 
+                          | $ 
+                          = project.project_price
+                        
+javascript:
+  $(function() {
+    setTimeout(function(){
+      $('.alert').slideUp(500);
+    }, 2000);
+  });                          
+            

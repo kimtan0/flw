@@ -1,0 +1,18 @@
+.d-flex.flex-column.min-vh-100.justify-content-center.align-items-center
+  .w-100.mb-5
+    .row.row-homepage
+      .col-2.col-sm-3
+      .col-8.col-sm-6.p-4.p-sm-5.p-lg-4.p-xl-5.pb-0.pb-sm-0.pb-lg-4.pb-xl-5
+        .table.mb-0.d-flex.justify-content-center.align-items-center
+          .row.row-homepage style="vertical-align:middle"
+            .col-12.mb-3.mb-sm-4.mb-lg-5
+              h1.h2-homepage.pl-0.pb-0#login-header style="text-align:center" Cancel Project Confirmation 
+              p.h3-homepage.mt-5 A penalty of 5% of the total project price will be incurred on your behalf. Are you sure you wish to cancel this project?
+              .d-flex.flex-column.justify-content-center.align-items-center
+                = simple_form_for :cancel, url: cancel_path, method: "POST" do |f|
+                  .row 
+                    .col-6
+                      = f.submit "Confirm", data: { confirm: 'Are you certain you want to cancel this project? A penalty of 5% of the total project price will be incurred on your behalf.' }, class: "btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3 mr-2", style:"border-radius: 12px; color: white; background-color:#80d144"
+                    .col-6
+                      = link_to 'Back', accepted_project_details_path, class: 'btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3 mr-2', style: 'border-radius: 12px; color: white; background-color:#80d144' 
+      .col-2.col-sm-3

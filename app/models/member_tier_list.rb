@@ -1,0 +1,2 @@
+class MemberTierList < ApplicationRecord
+end

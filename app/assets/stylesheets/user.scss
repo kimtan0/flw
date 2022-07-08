@@ -102,6 +102,172 @@
   max-width:60px;
 }
 
+.card-project-width{
+  width: 18rem;
+}
+
+
+
+
+
+.custom-check {
+  line-height: 100%;
+  display: block;
+  text-align: left;
+  margin-right: 30px;
+}
+
+table .custom-check {
+  margin: 0 -7px 0 16px;
+  display: inline-block;
+}
+
+.custom-check-input {
+  background-color: #fff;
+  border: 2px solid #fff;
+  margin: 0 0 0 1px;
+  position: absolute;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: 0;
+}
+
+.custom-check-input[type="checkbox"] {
+  width: 12px;
+  height: 12px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 0 0 1px #b7c2c8;
+  -moz-box-shadow: 0 0 0 1px #b7c2c8;
+  box-shadow: 0 0 0 1px #b7c2c8;
+  margin-top: 3px;
+}
+
+.custom-check-md .custom-check-input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+}
+
+.custom-check-md .custom-check-input[type="checkbox"]:checked {
+  background-position: top 1px center;
+}
+
+.custom-check-md .custom-check-input[type="checkbox"] + .custom-check-label {
+  padding-left: 31px;
+}
+
+
+
+.custom-check-input:hover {
+  background-color: #efefef;
+}
+
+
+.custom-check-input.check-primary[type="checkbox"] {
+  width: 13px;
+  height: 13px;
+  border: 1px solid #b7c2c8;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.custom-check-md .custom-check-input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+}
+.custom-check-input[type="checkbox"]:checked {
+  background: #fff url("/assets/checked.png") center top no-repeat;
+}
+.custom-check-md .custom-check-input[type="checkbox"]:checked {
+  background-position: top 1px center;
+}
+.custom-check-input.check-primary[type="checkbox"]:checked {
+  background: #0367da url("/assets/checked-white.png") center top 2px no-repeat;
+  border-color: #0367da;
+}
+.custom-check-input::-ms-check {
+  display: none;
+}
+
+table .custom-check-input[type="checkbox"] {
+  margin: 0;
+  position: relative;
+}
+.auth-form .custom-check-input[type="checkbox"] {
+  width: 11px;
+  height: 11px;
+  border: 1px solid #979797;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  margin: 5px 0 0;
+}
+
+.auth-form .custom-check-input[type="checkbox"]:checked {
+  background: #fff url("/assets/checked.png") center/7px 5px no-repeat;
+}
+#campaign-analysis-details .custom-check-input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  margin-top: 1px;
+}
+#campaign-analysis-details .custom-check-input[type="checkbox"]:not(:checked) {
+  background-color: transparent;
+}
+#campaign-analysis-details .custom-check-input[type="checkbox"]:checked {
+  background-position: center;
+}
+
+.rate {
+  float: left;
+  height: 46px;
+  padding: 0 10px;
+}
+.rate:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
+}
+.rate:not(:checked) > label {
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+.rate:not(:checked) > label:before {
+  content: '★ ';
+}
+.rate > input:checked ~ label {
+  color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
+.profile-link{
+  color:grey;
+}
+
+.profile-link:hover{
+  color:#80d144;
+}
+
+
 @media screen and (max-width: 1680px) {
 
   .details-col{
@@ -404,5 +570,9 @@
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 8px solid #babdb9;
+  }
+
+  .card-project-width{
+    width: 100%;
   }
 }

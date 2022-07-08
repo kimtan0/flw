@@ -89,6 +89,13 @@
   font-weight: 800;
   line-height: 98px;
 }
+.project-details-title{
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.42611rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 98px;
+}
 .p-homepage{
   font-family: 'Montserrat Alternates', sans-serif;
   font-size: 1.25em;
@@ -180,6 +187,10 @@
   font-style: normal;
   font-weight: 800;
   line-height: 32px;
+  &.project-details-description{
+    font-size: 1.6848rem;
+    font-weight: 500;
+  }
   &.sub-header-font{
     font-size: 1em;
   }
@@ -193,10 +204,9 @@
 
 .bg-img {
   background-repeat: no-repeat;
-  background-position: 90%;
-  background-size: auto 100%;
+
   &#countdown {
-    background-image: url("countdown-bg.svg");
+    background-image: url("smile.jpg");
   }
   &#contact {
     background-image: url("contact-us-bg.png");
@@ -223,8 +233,7 @@
   height: 82%;
 }
 .img-shoppage{
-  width: 60%;
-  margin: 0 auto;
+  width: 100%;
 }
 .img-analyzer{
   width: 30%;
@@ -287,6 +296,27 @@
   color:black;
 }
 
+.join-us-bg-img{
+  background-image: url("smile.jpg");
+  background-repeat: no-repeat;
+  background-position: 0%;
+  background-size: auto 100%;
+
+}
+
+.project-details-padding{
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  padding-right: calc(var(--bs-gutter-x) * .5);
+}
+
+.modal-dialog {
+  margin: 20vh auto 0px auto
+}
+
+abbr{ 
+  display:none;
+} 
+    
 @media (min-width: 1680px) {
   .bg-img {
     background-position: 95%;
@@ -510,6 +540,9 @@
     font-size: 1.8em;
     &.dashboard-skin-content{
       font-size: 1.0em;
+      &.project-title{
+        font-size: 1.1em;
+      }
     }
   }
   #login-header{
@@ -621,6 +654,9 @@
   }
   .sub-header-width{
     width: 90%;
+    &.kek{
+      width:100%;
+    }
   }
 }
 
@@ -791,10 +827,10 @@
     width: 60%;
     margin: 0 auto;
   }
-  .img-shoppage{
-    width: 40%;
-    margin: 0 auto;
-  }
+  // .img-shoppage{
+  //   width: 40%;
+  //   margin: 0 auto;
+  // }
   .about-group-img{
     width: 60%;
     margin: 0 auto;
@@ -803,6 +839,9 @@
     font-size: 1.5em;
     &.dashboard-skin-content{
       font-size: 0.9em;
+      &.project-title{
+        font-size: 1.1rem;
+      }
     }
   }
   #login-header{

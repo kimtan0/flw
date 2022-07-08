@@ -44,11 +44,15 @@
                   .input-group
                     = f.select :country, options_for_select(countries, :selected => 0), {prompt: "Country"}, class: "form-control form-control-lg p-homepage mb-sm-3 custom-select checkout-input", style: "border-radius:12px"
                 .col-12
+                  .label.mb-1 Use referral code to get 20$ reward : 
                   .input-group
-                    = select_tag "role", raw("<option>Freelancer</option><option>Employer</option>"), prompt: "Role", class: "form-control form-control-lg p-homepage mb-sm-3 custom-select checkout-input", style: "border-radius:12px"
+                    = text_field "referral_code", nil, class:"form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Referral Code"
+                .col-12
+                  .input-group
+                    = select_tag "role", raw("<option>Freelancer</option><option>Employer</option>"), prompt: "Role", class: "form-control form-control-lg p-homepage mb-sm-3 custom-select checkout-input", style: "border-radius:12px"   
               .row.row-homepage.mt-0.mt-sm-4
                 .col-12.col-sm-6.pt-2.pt-sm-3.d-flex.justify-content-center.justify-content-sm-start.align-items-center
-                  = link_to "Already have an account ?", login_path, {class:"register-link"}
+                  = link_to "Already have an account ?", home_login_path, {class:"register-link"}
                 .col-12.col-sm-6.d-flex.justify-content-center.justify-content-sm-end.align-items-center
                   = f.submit "Register", class: 'btn btn-dark btn-outline-secondary h3-homepage px-5 px-md-4 px-sm-4 py-sm-2 mt-3 mt-sm-2 login-button-font', style: 'border-radius: 12px; color: white;'
       .col-2.col-sm-3

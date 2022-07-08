@@ -1,0 +1,32 @@
+= form_for @user, html:{class:'d-flex flex-column min-vh-100 justify-content-center align-items-center'}, url: topup_process_path, method: "POST" do |f|
+  .w-100.mb-5
+    .row.row-homepage
+      .col-2.col-sm-3
+      .col-8.col-sm-6.p-4.p-sm-5.p-lg-4.p-xl-5.pb-0.pb-sm-0.pb-lg-4.pb-xl-5
+        .table.mb-0.d-flex.justify-content-center.align-items-center
+          .row.row-homepage style="vertical-align:middle"
+            .col-12.mb-3.mb-sm-4.mb-lg-5
+              h1.h2-homepage.pl-0.pb-0#login-header style="text-align:center" Topup Account Balance
+            .col-12
+              .row.row-homepage.p-0
+                
+                .col-12
+                  .label Account Balance : 
+                  .input-group
+                    = f.label :balance, @balance, class: "form-control form-control-lg p-homepage mb-sm-3 checkout-input", style: "border-radius:12px"
+                .col-12
+                  .label Topup Amount : 
+                  .input-group
+                    = number_field_tag "amount", nil, min:10, max:999999.99, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Topup Amount"    
+              .row.row-homepage.mt-0.mt-sm-4
+                .col-12.col-sm-6.d-flex.justify-content-center.justify-content-sm-start.align-items-center
+                  = link_to "Back", user_my_account_path, {class:"btn btn-dark btn-outline-secondary h3-homepage px-5 px-md-4 px-sm-4 py-sm-2 mt-3 mt-sm-2 login-button-font", style: 'border-radius: 12px; color: white;'}
+                .col-12.col-sm-6.d-flex.justify-content-center.justify-content-sm-end.align-items-center
+                  = f.submit "Topup", data: { confirm: 'Are you certain you wish to topup this amount to your account?' }, class: "btn btn-dark btn-outline-secondary h3-homepage px-5 px-md-4 px-sm-4 py-sm-2 mt-3 mt-sm-2 login-button-font", style:"border-radius: 12px; color: white;"
+      .col-2.col-sm-3
+javascript:
+  $(function() {
+    setTimeout(function(){
+      $('.alert').slideUp(500);
+    }, 2000);
+  });

@@ -1,0 +1,2 @@
+class ProjectMilestone < ApplicationRecord
+end

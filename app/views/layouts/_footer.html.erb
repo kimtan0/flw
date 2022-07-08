@@ -1,0 +1,50 @@
+<footer class="page-footer font-small stylish-color-dark footer-container" >
+  <div class="container text-left pb-5">
+    <div class="row p-homepage">
+      <div class="col-12 col-sm-6">
+        <div style="margin-left: -1rem;">
+          <%# <%= image_tag 'logo-full-transparent.svg', class: 'navbar-logo footer-logo', style: 'margin: 2.7rem 0.3rem 0 0;' %>
+        </div>
+        <div class="mt-4">
+          <div>31, Tinkerscape, RekaScape,</div>
+          <div>Persiaran APEC,</div>
+          <div>Cyber 8, 63000,</div>
+          <div>Cyberjaya</div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 mt-5 pt-2">
+        <div class="row">
+          <div class="col-5">
+            <ul class="list-unstyled footer-link">
+              <li>
+                <p><%= link_to "Home", root_path, style: 'text-decoration: none; color: white;' %></p>
+              </li>
+              <li>
+                <p><%= link_to "Browse Projects", user_Index_path, style: 'text-decoration: none; color: white;' %></p>
+              </li>
+              <li>
+                <p><%= link_to "Post projects", user_project_path, style: 'text-decoration: none; color: white;' %></p>
+              </li>
+              <li>
+                <p><%= link_to "About Us", "facebook.com", style: 'text-decoration: none; color: white;' %></p>
+              </li>
+            </ul>
+          </div>
+          <div class="col-7">
+            <ul class="list-unstyled footer-link">
+              <li >
+                <p><%= link_to "Login", home_login_path, style: 'text-decoration: none; color: white;' %></p>
+              </li>
+              <li>
+                <p><%= link_to "Join us", home_register_path, style: 'text-decoration: none; color: white;' %></p>
+              </li>
+              <li>
+                <p><%= link_to "Privacy & Policy", "facebook.com", style: 'text-decoration: none; color: white;' %></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

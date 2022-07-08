@@ -7,16 +7,16 @@
     <div class="d-flex justify-content-end">
       <div class="row nav-link-container text-left mr-1">
         <div class="col-3">
-          <%= link_to "Browse Projects", "https://facebook.com", class: "nav-link link-hover-color" %>
+          <%= link_to "Browse Projects", user_Index_path, class: "nav-link link-hover-color" %>
         </div>
         <div class="col-3">
-          <%= link_to "Post Projects", "https://facebook.com", class: "nav-link link-hover-color" %>
+          <%= link_to "Post Projects", user_project_category_path, class: "nav-link link-hover-color" %>
         </div>
         <div class="col-3">
-          <%= link_to "Sign Up", "https://facebook.com", class: "nav-link link-hover-color" %>
+          <%= link_to "Sign Up", home_register_path, class: "nav-link link-hover-color" %>
         </div>
         <div class="col-3 nav-btn-login">
-          <%= link_to "Login", login_path, class: "btn btn-success ml-4 px-5 h3-homepage", id: "button-login" %>
+          <%= link_to "Login", home_login_path, class: "btn btn-success ml-4 px-5 h3-homepage", id: "button-login" %>
         </div>
       </div>
     </div>
@@ -24,16 +24,16 @@
   <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <%= link_to "Browse Projects", "https://facebook.com", class: "nav-link link-hover-color" %>
+        <%= link_to "Browse Projects", user_Index_path, class: "nav-link link-hover-color" %>
       </li>
       <li class="nav-item active links">
-        <%= link_to "Post Projects", "https://facebook.com", class: "nav-link link-hover-color" %>
+        <%= link_to "Post Projects", user_project_path, class: "nav-link link-hover-color" %>
       </li>
       <li class="nav-item active"> 
-        <%= link_to "Sign Up", "https://facebook.com", class: "nav-link link-hover-color" %>
+        <%= link_to "Sign Up", home_register_path, class: "nav-link link-hover-color" %>
       </li>
       <li class="nav-item nav-btn-login">
-        <%= link_to "Login", "https://facebook.com", class: "btn btn-success ml-4 px-5 h3-homepage", id: "button-login" %>
+        <%= link_to "Login", home_login_path, class: "btn btn-success ml-4 px-5 h3-homepage", id: "button-login" %>
       </li>
     </ul>
   </div>

@@ -1,0 +1,131 @@
+- flash.each do |type, msg|
+  -if type == "notice" 
+    .alert.alert-danger.mt-4
+      = msg
+  -else
+    .alert.alert-success.mt-4
+      = msg
+= form_for @project, html:{class:'d-flex flex-column min-vh-100 justify-content-center align-items-center'}, url: user_index_path(@project), method: "POST" do |f|
+  .w-100.mb-5
+    .row.row-homepage
+      .col-2.col-sm-3
+      .col-8.col-sm-6.p-4.p-sm-5.p-lg-4.p-xl-5.pb-0.pb-sm-0.pb-lg-4.pb-xl-5
+        .table.mb-0.d-flex.justify-content-center.align-items-center
+          .row.row-homepage style="vertical-align:middle"
+            .col-12.mb-3.mb-sm-4.mb-lg-5
+              h1.h2-homepage.pl-0.pb-0#login-header style="text-align:center" Create project
+            .col-12
+              .row.row-homepage.p-0
+                .col-12
+                  .input-group
+                    = f.text_field :project_name, required: true, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Project Name"
+                .col-12
+                  .input-group
+                    = f.text_area :project_description, required: true, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Project Description"
+                .col-12
+                  .input-group
+                    - if @project_category == "programming" 
+                      = select_tag 'projectDetaildCategory', options_for_select(programming_category, :selected => 0), prompt: "Project Detailed Category", class: "form-control form-control-lg p-homepage mb-sm-3 custom-select checkout-input", style: "border-radius:12px"    
+                    -elsif @project_category == "design" 
+                      = select_tag 'projectDetaildCategory', options_for_select(design_category, :selected => 0), prompt: "Project Detailed Category", class: "form-control form-control-lg p-homepage mb-sm-3 custom-select checkout-input", style: "border-radius:12px"
+                    -elsif @project_category == "business" 
+                      = select_tag 'projectDetaildCategory', options_for_select(business_category, :selected => 0), prompt: "Project Detailed Category", class: "form-control form-control-lg p-homepage mb-sm-3 custom-select checkout-input", style: "border-radius:12px"
+                    -elsif @project_category == "marketing" 
+                      = select_tag 'projectDetaildCategory', options_for_select(marketing_category, :selected => 0), prompt: "Project Detailed Category", class: "form-control form-control-lg p-homepage mb-sm-3 custom-select checkout-input", style: "border-radius:12px"
+                    -elsif @project_category == "finance" 
+                      = select_tag 'projectDetaildCategory', options_for_select(finance_category, :selected => 0), prompt: "Project Detailed Category", class: "form-control form-control-lg p-homepage mb-sm-3 custom-select checkout-input", style: "border-radius:12px"
+                    -elsif @project_category == "education & training" 
+                      = select_tag 'projectDetaildCategory', options_for_select(education_training_category, :selected => 0), prompt: "Project Detailed Category", class: "form-control form-control-lg p-homepage mb-sm-3 custom-select checkout-input", style: "border-radius:12px"
+                .col-12
+                  .input-group
+                  = f.select :project_type, raw("<option>Normal Project</option><option>Competition</option><option>Bid</option>"), {prompt: "Project Type"}, class: "form-control form-control-lg p-homepage mt-2 mt-sm-0 mb-sm-3 custom-select checkout-input", style: "border-radius:12px"
+                .col-12
+                  .input-group
+                    = f.number_field :project_price, required: true, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Project Price"
+                .col-12
+                  .form-group
+                    .label Project Deadline:
+                    = f.date_field :project_deadline, as: :date,placeholder: "Project Deadline", value: f.object.try(:strftime,"%m/%d/%Y"), class: 'form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input', style: "border-radius:12px"
+                .col-12.mb-3
+                  .input-group
+                    .custom-check.custom-check-md
+                      = f.check_box :NDA, id:"csv-header", class:"custom-check-input"
+                      .label.custom-check-label.font-weight-500 is an NDA neccessary for this project?
+
+                .col-12.d-flex.align-items-center.justify-content-center.shop-product-section.mb-2.mb-sm-4
+                  .div
+                    - if @project&.avatar&.attached?
+                      = image_tag (@project.avatar), style: 'width: 100%; padding: 0; object-fit: cover; background-color:#C4C4C4;'
+                    - else
+                      = image_tag "grey.png", style: 'width: 100%; padding: 0; object-fit: cover; background-color:#C4C4C4;', id: 'img'
+                .col-12.d-flex.align-items-center.justify-content-center
+                  .input-group.mb-3.input.d-flex.align-items-center.justify-content-center
+                    input.form-control.form-control-lg.p-homepage#upload style="border-color: #e5e5e5; border-radius: 12px 0 0 12px; background-color: #e5e5e5;" type="text" placeholder="Upload Project Cover"
+                    button.btn.btn-dark.btn-outline-secondary.h3-homepage.px-3.px-md-4#frontend-image-submit style="border-radius: 0px 12px 12px 0px; color: white;" type="button" Choose
+                    = f.file_field :avatar, required: true, accept: 'image/jpeg, image/png', class: 'btn', id: 'image_submit', style: 'display:none'
+              .row.row-homepage.mt-0.mt-lg-4
+                .col-12.col-lg-3.d-flex.justify-content-center.justify-content-sm-start.align-items-center
+                  = link_to "Back", user_project_category_path, class:"btn btn-dark btn-outline-secondary h3-homepage px-5 px-md-4 px-sm-4 py-sm-2 mt-3 mt-sm-2 login-button-font w-100", style: 'border-radius: 12px; color: white;'
+                .col-0.col-lg-4
+                .col-12.col-lg-5.d-flex.justify-content-center.justify-content-sm-end.align-items-center
+                  = f.submit "Create Project", class: 'btn btn-dark btn-outline-secondary h3-homepage px-5 px-md-4 px-sm-4 py-sm-2 mt-3 mt-sm-2 login-button-font w-100', style: 'border-radius: 12px; color: white;'
+      .col-2.col-sm-3
+
+javascript:
+
+  $(function() {
+    setTimeout(function(){
+      $('.alert').slideUp(500);
+    }, 2000);
+  });
+
+  image_submit.onchange = evt => {
+    const [file] = image_submit.files
+    if (file) {
+      img.src = URL.createObjectURL(file)
+      upload.value = file.name
+    }
+  }
+
+  $('#frontend-image-submit').click(function() {
+    $('#image_submit').trigger('click');
+  });
+
+
+
+  $(document).ready(function() {
+        $('#start-date').datepicker({dateFormat: 'dd M yy', minDate: 0});
+        $('#end-date').datepicker({dateFormat: 'dd M yy', minDate: 0});
+    });
+
+    $('#start-date').change(function() {
+        if ($(this).val() == '') {
+            min = 0;
+            max = null;
+        }
+        else {
+            date = new Date($(this).val());
+            min = new Date(date.setDate(date.getDate()));
+            max = new Date(date.setDate(date.getDate() + 7));
+        }
+
+
+        $('#end-date').datepicker('option', 'minDate', min);
+        $('#end-date').datepicker('option', 'maxDate', max);
+    });
+
+    $('#end-date').change(function() {
+        if ($(this).val() == '') {
+            min = 0;
+            max = null;
+        }
+        else {
+            date = new Date($(this).val());
+            min = new Date(date.setDate(date.getDate() - 7));
+            max = new Date(date.setDate(date.getDate() + 7));
+        }
+
+        $('#start-date').datepicker('option', 'minDate', min);
+        $('#start-date').datepicker('option', 'maxDate', max);
+    });
+  
