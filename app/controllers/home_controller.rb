@@ -10,19 +10,19 @@ class HomeController < ApplicationController
     @user = User.new
   end
 
-
   def create
     reference_user = User.find_by(reference_code: params[:referral_code])
     password = params[:password]
     confirm_password = params[:confirm_password]
     user_account = User.find_by(email: params[:user][:email])
+    admin_accont = Admin.find_by(email: params[:user][:email])
     role = params[:role]
     phone_number = params[:phone_number]
 
     if password == confirm_password
       @user = User.new(user_params.to_h.merge(password: password, phone_number: phone_number, reference_code: SecureRandom.hex(5)))
       if phone_number.length == 11
-        if user_account.blank?
+        if user_account.blank? && admin_accont.blank?
           @user.save
           Rating.new(user_id: @user.id).save
           credit = Credit.new(user_id: @user.id)
@@ -55,7 +55,7 @@ class HomeController < ApplicationController
 
   def authentication
     user = User.find_by(email: params[:email])
-
+    admin = Admin.find_by(email: params[:email])
     if user.present? && user.authenticate(params[:password])
       cookies[:user_id] = user.id
       if user.employer_status == true && user.freelancer_status == true
@@ -66,14 +66,22 @@ class HomeController < ApplicationController
         cookies[:user_role] = "freelancer"
       end
       redirect_to user_Index_path, flash: { info: "User has logged in" }
+    elsif admin.present? && admin.authenticate(params[:password])
+      cookies[:admin_id] = admin.id
+      redirect_to admin_index_path, flash: { info: "User has logged in" }
+
     else
       redirect_to home_login_path, flash: { notice: "User does not exist" }
     end
   end
 
   def logout
-    cookies.delete :user_id
-    cookies.delete :user_role
+    if cookies[:user_id].present?
+      cookies.delete :user_id
+      cookies.delete :user_role
+    elsif cookies[:admin_id].present?  
+      cookies.delete :admin_id
+    end
     redirect_to root_path
   end
 
@@ -114,7 +122,6 @@ class HomeController < ApplicationController
     else
       redirect_to home_register_path, flash: { notice: "Incorrect Phone Number format, sample phone number format: 60123456798" }
     end
-
   end
 
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_08_101612) do
+ActiveRecord::Schema.define(version: 2022_07_09_131315) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,12 +40,30 @@ ActiveRecord::Schema.define(version: 2022_07_08_101612) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "admins", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "credits", force: :cascade do |t|
     t.integer "user_id"
     t.decimal "balance", precision: 8, scale: 2, default: "0.0"
     t.decimal "fixed_balance", precision: 8, scale: 2, default: "0.0"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "customer_service_requests", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "closed", default: false
   end
 
   create_table "member_tier_lists", force: :cascade do |t|
@@ -138,6 +156,7 @@ ActiveRecord::Schema.define(version: 2022_07_08_101612) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
     t.string "reference_code"
+    t.string "uuid"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

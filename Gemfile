@@ -7,6 +7,7 @@ gem 'simple_form'
 
 gem 'acts-as-taggable-on', '~> 9.0'
 gem "figaro"
+gem 'pubnub', '~> 5.0.0'
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap', '~> 5.0.0'

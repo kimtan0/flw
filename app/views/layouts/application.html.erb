@@ -31,6 +31,8 @@
       <%= render partial: "layouts/user_header" %>
     <% elsif cookies[:user_id].present?%>
       <%= render partial: "layouts/user_header" %>
+    <% elsif cookies[:admin_id].present?%>
+      <%= render partial: "layouts/admin_header" %>
     <% elsif controller.action_name != "login" && controller.action_name != "register"%>
       <%= render partial: "layouts/header" %>
     <% end %>
@@ -41,5 +43,7 @@
     <%= yield %>
   </body>
 
-  <%= render partial: "layouts/footer"%>
+  <% if !url.include?('admin')=%>
+    <%= render partial: "layouts/footer"%>
+  <% end %>
 </html>

@@ -1,14 +1,10 @@
 class UserController < ApplicationController
 
-  before_action :check_user, only: [:project, :project_category, :accept_project, :project_details, :my_project, :my_account]
+  before_action :check_user, only: [:project, :project_category, :accept_project, :project_details, :my_project, :my_account, :customer_service_category, :customer_service]
   before_action :topup_status, only: [:my_account]
-
- 
 
   def Index
     preprocessProject = Project.where(project_acceptance_user_id: nil).or(Project.where(project_type: 'Bid'))
-
-
     if params["search"]
       if !params["search"]["PC"].blank? && !params["search"]["PDC"].blank?
         @filter = params["search"]["PC"].concat(params["search"]["PDC"]).flatten.reject(&:blank?)
@@ -29,7 +25,6 @@ class UserController < ApplicationController
     end
   end
 
-
   def project_category
     @firstproject = Project.new
   end
@@ -38,17 +33,13 @@ class UserController < ApplicationController
     @project = Project.new
     @project_category = params[:project][:project_category].downcase
     cookies[:project_category] = @project_category
-
   end
 
-  
   def create
-
     project_price = (params[:project][:project_price]).to_i
     deposit_amount = project_price *10 / 100
     credit = Credit.find_by(user_id: cookies[:user_id])
     credit_balance  = credit.balance
-
 
     if credit_balance <= deposit_amount
       redirect_to user_Index_path, flash: { notice: "Insufficient Credit Balance, 10% of project price needs act as a deposit." }
@@ -108,9 +99,11 @@ class UserController < ApplicationController
     end
 
     @deadline = (@project.project_deadline - Date.today).to_i
+
     if cookies[:user_id].present? && cookies[:user_id] == @project.project_owner_id
       @user_status = TRUE
     end
+
     pm = ProjectMilestone.find_by(project_id: params[:id])
     @width = pm.project_milestone_percentage
     @description = pm.project_milestone_description
@@ -124,7 +117,6 @@ class UserController < ApplicationController
 
   def project_edit
     @project = Project.find(params[:id])
-    
   end
 
   def edit
@@ -141,17 +133,18 @@ class UserController < ApplicationController
   end
 
   def destroy
-
     project = Project.find(params[:id])
-    
+    project_price = project.project_price
+    project_price_10 = project_price *10 /100
+
     if project.project_acceptance_user_id.nil?
+      owner_credit = Credit.find_by(user_id:project.project_owner_id)
+      owner_credit.upadate(balance: owner_credit.balance + project_price_10, fixed_balance: owner_credit.fixed_balance - project_price_10)
       project.delete
       ProjectMilestone.find_by(project_id: params[:id]).delete
       redirect_to user_Index_path, flash: { info: "Project has been deleted" }
-    else
 
-      project_price = project.project_price
-      project_price_10 = project_price *10 /100
+    else
       project_price_5 = project_price *5 /100
       owner_credit = Credit.find_by(user_id:project.project_owner_id)
       freelancer_credit = Credit.find_by(user_id: project.project_acceptance_user_id)
@@ -188,7 +181,6 @@ class UserController < ApplicationController
     @project = Project.where(project_acceptance_user_id: cookies[:user_id])
   end
 
-
   def accepted_project_details
     @project = Project.find(params[:id])
     @deadline = (@project.project_deadline - Date.today).to_i
@@ -197,6 +189,7 @@ class UserController < ApplicationController
     @description = pm.project_milestone_description
     @user = User.find(@project.project_owner_id)
     rating = Rating.find_by(user_id: @project.project_owner_id)
+
     if rating.rating == 0 && rating.rating_count == 0
       @actual_rating = 0
       @actual_rating_count = 0
@@ -215,18 +208,15 @@ class UserController < ApplicationController
   end
 
   def cancel_accepted_project_confirmation
-    
   end
 
   def cancel_accepted_project
-
     project = Project.find(params[:id])
     project_price = project.project_price
     project_price_10 = project_price *10 /100
     project_price_5 = project_price *5 /100
     owner_credit = Credit.find_by(user_id:project.project_owner_id)
     freelancer_credit = Credit.find_by(user_id: project.project_acceptance_user_id)
-
 
     if freelancer_credit.balance <= project_price_5
       redirect_to user_my_account_my_accepted_project_path, flash: { notice: "Project failed to cancel, insufficient balance to cancel project. Your balance needs to be at least 5% of the project price." }
@@ -235,19 +225,15 @@ class UserController < ApplicationController
       freelancer_credit.update(balance: freelancer_credit_balance)
       owner_credit_balance = owner_credit.balance + project_price_5
       owner_credit.update(balance: owner_credit_balance)
-
       project.update(project_status: nil, project_acceptance_user_id: nil)
       redirect_to user_my_account_my_accepted_project_path, flash: { info: "Project has been canceled" }
     end
-
   end
 
   def complete_project_confirmation
-
   end
 
   def complete_project
-    
     project = Project.find(params[:id])
     rating = Rating.find_by(user_id: project.project_owner_id)
     rating_count = rating.rating_count + 1
@@ -255,14 +241,11 @@ class UserController < ApplicationController
     rating.update(rating: actual_rating, rating_count: rating_count)
     project.update(project_status: "Completed")
     ProjectMilestone.find_by(project_id: params[:id]).update(project_milestone_percentage: 100)
-
-
     redirect_to user_Index_path, flash: { info: "Project has been completed" }
   end
 
 
   def rate_freelancer
-
     project = Project.find(params[:id])
     project_price = project.project_price
     credit = Credit.find_by(user_id: project.project_owner_id)
@@ -270,6 +253,7 @@ class UserController < ApplicationController
     balance = credit.balance
     project_price_10 = project_price *10 /100
     project_price_90 = project_price *90 /100
+
     if fixed_balance <= project_price_10 || balance <= project_price_90
       redirect_to user_Index_path, flash: { notice: "Insufficient Credit Balance, please topup." }
       return
@@ -288,11 +272,8 @@ class UserController < ApplicationController
     freelancer_amount = freelancer_tier.total_amount + project_price
     project_owner_tier.update(total_amount: project_owner_amount)
     freelancer_tier.update(total_amount: freelancer_amount)
-
     tier_list_reward(project_owner_tier)
     tier_list_reward(freelancer_tier)
-
-
     rating = Rating.find_by(user_id: project.project_acceptance_user_id)
     rating_count = rating.rating_count + 1
     actual_rating = rating.rating + params[:rate].to_i
@@ -325,7 +306,6 @@ class UserController < ApplicationController
       credit.update(balance: credit.balance + reward)
       tier.update(level_3_status: true, current_tier_list: 3)
     end
-
   end
 
   def profile
@@ -350,7 +330,6 @@ class UserController < ApplicationController
     fixed_balance = credit.fixed_balance.to_s
     @balance =  "$" + balance
     @fixed_balance = "$" + fixed_balance
-
   end
 
   def top_up_process
@@ -393,8 +372,38 @@ class UserController < ApplicationController
     bill_url(billCode[0]["BillCode"])
   end
 
+  def customer_service_category
+    @firstRequest = CustomerServiceRequest.new
+  end
+
+  def customer_service
+    @request = CustomerServiceRequest.new
+    if params[:customer_service_request][:title] == "Cash Out"
+      @label = "Specify the amount you wish to cash out. You can only cash out your balance excluding fixed balance."
+      cookies[:request_title] = "Cash Out"
+    else
+      @label = "Specify the problem you are facing."
+      cookies[:request_title] = "Error"
+    end
+  end
+
+  def customer_service_request
+    csr = CustomerServiceRequest.new(request_params.to_h.merge(
+      user_id: cookies[:user_id],
+      title: cookies[:request_title]
+    ))
+    csr.save
+    csr.request_list.add(cookies[:request_title]) 
+    csr.save
+    redirect_to user_Index_path, flash: { info: "Customer Service Request has been submitted. Our Customer Service will contact you." }
+  end
+
 
   private
+
+  def request_params
+    params.required(:customer_service_request).permit(:title, :description, :user_id)
+  end
   def project_params
     params.required(:project).permit(:project_name, :project_description,:project_category, :project_type, :project_price, :project_deadline, :tag_list, :balance, :NDA)
   end

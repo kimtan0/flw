@@ -1,0 +1,63 @@
+//delete button
+//report button
+.w-100 style="background-color: #e9ecf2"
+  .d-flex.justify-content-center
+    .row.sub-header-width.text-left.my-5
+      .col-12.col-lg-8.p-0 style="background-color: #fff"
+        .project-details-title.project-details-padding = @project.project_name
+        .img-shoppage
+          = image_tag(@project.avatar, class:"d-block w-100", style:"width: 100%; height: 100%; padding: 0; object-fit: cover;" )
+        p.h3-homepage.project-details-description.project-details-padding.mt-3 = @project.project_description
+        p.h3-homepage.sub-header-font.project-details-padding
+          | Project Cateogry:
+          - project_detailed_category = @project.project_detailed_category
+          - project_detailed_category = project_detailed_category.split.map(&:capitalize).join(' ')
+          = project_detailed_category
+          | , 
+          - project_category = @project.project_category
+          - project_category = project_category.split.map(&:capitalize).join(' ')
+          = project_category
+        p.h3-homepage.sub-header-font.project-details-padding
+          | Project Type: 
+          = @project.project_type
+      .col-12.col-lg-4.text-center style="background-color: #f8f9fc"
+        .project-details-padding
+          h1.mt-3.mt-lg-5.pt-lg-5
+            | $ 
+            =@project.project_price
+          p.h3-homepage.sub-header-font.mt-3.text-center 
+            - name = @user.first_name.to_s + " " + @user.last_name.to_s
+            = link_to name, admin_profile_path(:id => @user.id), class: "profile-link"
+            |   
+            span style="color: #FFD700" = @actual_rating
+            |   
+            span.bi.bi-star-fill' style='color: #FFD700'
+            |(
+            = @actual_rating_count
+            |)
+          .mt-0
+            .row  
+              .col-6
+                = link_to "Delete", admin_path(:id => @project.id), method: :delete, data: { confirm: 'Are you certain you want to delete this project?' }, class: "btn h3-homepage px-3 px-md-5 py-3 py-md-3 ml-2 mt-3", style:"border-radius: 12px; color: white; background-color:#80d144"
+              .col-6
+                button.btn.h3-homepage.px-3.px-md-5.py-3.py-md-3.mt-3#email-submit style="border-radius: 12px; color: white; background-color:#80d144" type="button" data-toggle="modal" Report Project
+button#btn-email-modal style="display: none;" type="button" data-toggle="modal"  data-target="#emailSubmitModal"
+.modal.fade#emailSubmitModal style="z-index:1060;" role="dialog" aria-labelledby="emailSubmitModalLabel" aria-hidden="true"
+  .modal-dialog.modal-xl role="document"
+    .modal-content 
+      .modal-header style="border: none;"
+        button.close.h2-homepage type="button" data-dismiss="modal" aria-label="Close" X
+      .modal-body
+        .container-fluid.container-modal
+          .row
+            .col-12
+              h1.h2-homepage Report Project?
+              p.p-homepage.my-4.font-weight-bold Important! Read the terms before proceeding.
+              p.p-homepage.my-4.my-sm-5 Do note that this project will remain open until management takes any further action.
+              = link_to 'Report', admin_report_project_path, class: 'btn btn-block h3-homepage mb-4 mb-sm-0', style: 'background-color: #dba625; color: white; border-radius: 12px;'
+                                      
+javascript:
+
+  $('#email-submit').click(function() {
+    $('#btn-email-modal').trigger('click');
+  });
