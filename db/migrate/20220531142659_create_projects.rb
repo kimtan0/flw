@@ -10,7 +10,7 @@ class CreateProjects < ActiveRecord::Migration[6.1]
       t.string :project_milestone
       t.string :project_acceptance_user_id
       t.string :project_category
-      r.string :project_detailed_category
+      t.string :project_detailed_category
       t.timestamps
     end
   end
