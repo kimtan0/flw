@@ -4,7 +4,9 @@ class UserController < ApplicationController
   before_action :topup_status, only: [:my_account]
 
   def Index
-    preprocessProject = Project.where(project_acceptance_user_id: nil).or(Project.where(project_type: 'Bid'))
+    rawProject = Project.where(project_acceptance_user_id: nil).or(Project.where(project_type: 'Bid'))
+    preprocessProject = rawProject.where("project_deadline > ?", Date.today)
+
     if params["search"]
       if !params["search"]["PC"].blank? && !params["search"]["PDC"].blank?
         @filter = params["search"]["PC"].concat(params["search"]["PDC"]).flatten.reject(&:blank?)
@@ -36,6 +38,9 @@ class UserController < ApplicationController
   end
 
   def create
+    #need to test bid with third user
+    #need to close off bid when deadline is up
+    
     project_price = (params[:project][:project_price]).to_i
     deposit_amount = project_price *10 / 100
     credit = Credit.find_by(user_id: cookies[:user_id])
@@ -99,6 +104,7 @@ class UserController < ApplicationController
     end
 
     @deadline = (@project.project_deadline - Date.today).to_i
+    
 
     if cookies[:user_id].present? && cookies[:user_id] == @project.project_owner_id
       @user_status = TRUE
@@ -253,7 +259,7 @@ class UserController < ApplicationController
     balance = credit.balance
     project_price_10 = project_price *10 /100
     project_price_90 = project_price *90 /100
-
+    project_price_02 = project_price *2 /100
     if fixed_balance <= project_price_10 || balance <= project_price_90
       redirect_to user_Index_path, flash: { notice: "Insufficient Credit Balance, please topup." }
       return
@@ -262,8 +268,7 @@ class UserController < ApplicationController
       balance -= project_price_90
       credit.update(balance: balance, fixed_balance: fixed_balance)
       freelancer = Credit.find_by(user_id: project.project_acceptance_user_id)
-      freelancer_credit = freelancer.balance + project_price
-      freelancer.update(balance: freelancer_credit)
+      freelancer.update(balance: freelancer.balance + project_price - project_price_02)
     end
 
     project_owner_tier = MemberTierList.find_by(user_id: project.project_owner_id)
@@ -381,9 +386,12 @@ class UserController < ApplicationController
     if params[:customer_service_request][:title] == "Cash Out"
       @label = "Specify the amount you wish to cash out. You can only cash out your balance excluding fixed balance."
       cookies[:request_title] = "Cash Out"
-    else
+    elsif params[:customer_service_request][:title] == "Error"
       @label = "Specify the problem you are facing."
       cookies[:request_title] = "Error"
+    else
+      @label = "Specify the issue you wish to report."
+      cookies[:request_title] = "Report"
     end
   end
 

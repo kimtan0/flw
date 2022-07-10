@@ -124,6 +124,12 @@ class HomeController < ApplicationController
     end
   end
 
+  def about
+  end
+
+  def privacy_policy
+  end
+
 
   private
   

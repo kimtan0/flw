@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'home/register', to: "home#register"
   get 'home/edit', to: "home#edit"
   post 'home/edit', to: 'home#save'
+  get 'home/about_us', to: 'home#about'
+  get 'home/privacy', to: 'home#privacy_policy'
 
   resources :home
 

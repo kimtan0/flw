@@ -3,13 +3,13 @@
     <div class="row p-homepage">
       <div class="col-12 col-sm-6">
         <div style="margin-left: -1rem;">
-          <%# <%= image_tag 'logo-full-transparent.svg', class: 'navbar-logo footer-logo', style: 'margin: 2.7rem 0.3rem 0 0;' %>
+          <%= image_tag 'tLogo.svg', class: 'navbar-logo footer-logo', style: 'margin: 2.7rem 0.3rem 0 0;' %>
         </div>
         <div class="mt-4">
-          <div>31, Tinkerscape, RekaScape,</div>
-          <div>Persiaran APEC,</div>
-          <div>Cyber 8, 63000,</div>
-          <div>Cyberjaya</div>
+          <div>Suite 11-6, 6th Floor,</div>
+          <div>The Boulevard, Mid Valley City,</div>
+          <div>Lingkaran Syed Putra, 59200</div>
+          <div>Kuala Lumpur, Malaysia</div>
         </div>
       </div>
       <div class="col-12 col-sm-6 mt-5 pt-2">
@@ -26,7 +26,7 @@
                 <p><%= link_to "Post projects", user_project_path, style: 'text-decoration: none; color: white;' %></p>
               </li>
               <li>
-                <p><%= link_to "About Us", "facebook.com", style: 'text-decoration: none; color: white;' %></p>
+                <p><%= link_to "About Us", home_about_us_path, style: 'text-decoration: none; color: white;' %></p>
               </li>
             </ul>
           </div>
@@ -39,7 +39,7 @@
                 <p><%= link_to "Join us", home_register_path, style: 'text-decoration: none; color: white;' %></p>
               </li>
               <li>
-                <p><%= link_to "Privacy & Policy", "facebook.com", style: 'text-decoration: none; color: white;' %></p>
+                <p><%= link_to "Privacy & Policy", home_privacy_path, style: 'text-decoration: none; color: white;' %></p>
               </li>
               <li>
                 <p><%= link_to "Customer Service", user_customer_service_category_path, style: 'text-decoration: none; color: white;' %></p>

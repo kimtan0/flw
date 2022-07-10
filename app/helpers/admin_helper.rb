@@ -3,7 +3,8 @@ module AdminHelper
   def request_category
     [
       ["Cash Out","Cash Out"],
-      ["Error","Error"]
+      ["Error","Error"],
+      ["Report","Report"]
     ]
   end
 end

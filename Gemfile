@@ -8,7 +8,7 @@ gem 'simple_form'
 gem 'acts-as-taggable-on', '~> 9.0'
 gem "figaro"
 gem 'pubnub', '~> 5.0.0'
-
+gem 'pg', '~> 1.4', '>= 1.4.1'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap', '~> 5.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'

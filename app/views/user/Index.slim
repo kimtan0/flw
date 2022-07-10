@@ -33,19 +33,34 @@
             - user = User.find(project.project_owner_id)
             - if i.even?
               .col-1
-            .col-12.col-sm-5.mb-5.mx-2.d-flex.justify-content-center.align-item-center
-              .card.card-project-width.border-dark 
-                = link_to project_details_path(project.id), style:"text-decoration: none; color: black"
-                  = image_tag (project.avatar), class:"card-img-top"
-                  .card-body
-                    .h2-homepage.dashboard-skin-content.project-title.card-title.mb-5 = project.project_name
-                    .row
-                      .col-6
-                        p.card-text = user.first_name
-                      .col-6
-                        p.font-weight-bold.card-text.text-right 
-                          | $ 
-                          = project.project_price
+            -if i == 0
+              .col-12.col-sm-5.mb-5.mx-0.mx-sm-2.d-flex.justify-content-center.align-item-center.mt-3.mt-sm-0
+                .card.card-project-width.border-dark 
+                  = link_to project_details_path(project.id), style:"text-decoration: none; color: black"
+                    = image_tag (project.avatar), class:"card-img-top"
+                    .card-body
+                      .h2-homepage.dashboard-skin-content.project-title.card-title.mb-5 = project.project_name
+                      .row
+                        .col-6
+                          p.card-text = user.first_name
+                        .col-6
+                          p.font-weight-bold.card-text.text-right 
+                            | $ 
+                            = project.project_price
+            -else
+              .col-12.col-sm-5.mb-5.mx-0.mx-sm-2.d-flex.justify-content-center.align-item-center
+                .card.card-project-width.border-dark 
+                  = link_to project_details_path(project.id), style:"text-decoration: none; color: black"
+                    = image_tag (project.avatar), class:"card-img-top"
+                    .card-body
+                      .h2-homepage.dashboard-skin-content.project-title.card-title.mb-5 = project.project_name
+                      .row
+                        .col-6
+                          p.card-text = user.first_name
+                        .col-6
+                          p.font-weight-bold.card-text.text-right 
+                            | $ 
+                            = project.project_price
                         
 javascript:
   $(function() {
