@@ -299,5 +299,4 @@ DEPENDENCIES
   webdrivers
   webpacker (~> 5.0)
 
-BUNDLED WITH
-   2.2.30
+
