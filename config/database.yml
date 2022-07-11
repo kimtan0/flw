@@ -27,6 +27,6 @@ test:
 production:
   <<: *default
   database: flw_production
-  username: dermaskin
-  password: <%= ENV['DERMASKIN_DATABASE_PASSWORD'] %>
+  username: flw
+  password: <%= ENV['FLW_DATABASE_PASSWORD'] %>
 
