@@ -6,8 +6,10 @@
 #
 default: &default
   adapter: postgresql
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
 
 development:
   <<: *default
@@ -27,6 +29,6 @@ test:
 production:
   <<: *default
   database: flw_production
-  username: dermaskin
-  password: <%= ENV['DERMASKIN_DATABASE_PASSWORD'] %>
+  username: flw
+  password: <%= ENV['FLW_DATABASE_PASSWORD'] %>
 
