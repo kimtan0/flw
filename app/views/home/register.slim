@@ -46,10 +46,7 @@
                 .col-12
                   .label.mb-1 Use referral code to get 20$ reward : 
                   .input-group
-                    = text_field "referral_code", nil, class:"form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Referral Code"
-                .col-12
-                  .input-group
-                    = select_tag "role", raw("<option>Freelancer</option><option>Employer</option>"), prompt: "Role", class: "form-control form-control-lg p-homepage mb-sm-3 custom-select checkout-input", style: "border-radius:12px"   
+                    = text_field "referral_code", nil, class:"form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Referral Code"  
               .row.row-homepage.mt-0.mt-sm-4
                 .col-12.col-sm-6.pt-2.pt-sm-3.d-flex.justify-content-center.justify-content-sm-start.align-items-center
                   = link_to "Already have an account ?", home_login_path, {class:"register-link"}

@@ -28,9 +28,8 @@
             =@deadline
             |  Days
           p.h3-homepage.sub-header-font.mt-3.text-center 
-            = @user.first_name
-            |  
-            = @user.last_name
+            - name = @user.first_name.to_s + " " + @user.last_name.to_s
+            = link_to name, profile_path(:id => @user.id), class: "profile-link"
             |   
             span style="color: #FFD700" = @actual_rating
             |   

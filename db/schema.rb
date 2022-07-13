@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_09_131315) do
+ActiveRecord::Schema.define(version: 2022_07_13_094421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,10 +100,10 @@ ActiveRecord::Schema.define(version: 2022_07_09_131315) do
     t.string "project_detailed_category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "payment_type"
     t.float "project_price"
     t.date "project_deadline"
     t.boolean "NDA", default: false
+    t.date "project_available_deadline"
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -153,8 +153,6 @@ ActiveRecord::Schema.define(version: 2022_07_09_131315) do
     t.string "postcode"
     t.string "phone_number"
     t.string "country"
-    t.boolean "employer_status", default: false
-    t.boolean "freelancer_status", default: false
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

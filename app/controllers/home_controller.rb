@@ -34,12 +34,6 @@ class HomeController < ApplicationController
             reference_user_credit.update(balance: reference_user_credit.balance+20)  
             credit.update(balance: credit.balance+20)
           end
-
-          if role == "freelancer"
-            @user.update_attribute(:freelancer_status, true)
-          else
-            @user.update_attribute(:employer_status, true)
-          end
           redirect_to home_login_path, flash: { info: "Account successfully created" }
         else
           redirect_to home_register_path, notice: "Email already exist."
@@ -58,13 +52,6 @@ class HomeController < ApplicationController
     admin = Admin.find_by(email: params[:email])
     if user.present? && user.authenticate(params[:password])
       cookies[:user_id] = user.id
-      if user.employer_status == true && user.freelancer_status == true
-        cookies[:user_role] = "both"
-      elsif user.employer_status == true
-        cookies[:user_role] = "employer"
-      else
-        cookies[:user_role] = "freelancer"
-      end
       redirect_to user_Index_path, flash: { info: "User has logged in" }
     elsif admin.present? && admin.authenticate(params[:password])
       cookies[:admin_id] = admin.id

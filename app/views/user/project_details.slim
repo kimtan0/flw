@@ -35,16 +35,20 @@
               = link_to "Edit", project_edit_path(:id => @project.id), class: " btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3", style:"border-radius: 12px; color: white; background-color:#80d144"
               = link_to "Delete", user_path(:id => @project.id), method: :delete, data: { confirm: 'Are you certain you want to delete this project? If the project has already been accepted, a penalty of 5% of the total project price will be incurred on your behalf.' }, class: "btn h3-homepage px-3 px-md-5 py-3 py-md-3 ml-2 mt-3", style:"border-radius: 12px; color: white; background-color:#80d144"
             -else
-              -if @project.project_type == "Bid" && @deadline > 0
+              -if @project.project_type == "Bid" && @available_deadline > 0
                 = form_tag bid_path do
-                  = number_field_tag "project_price", nil, max: @project.project_price - 1, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Bid"
+                  = number_field_tag "project_price", nil,min:1, max: @project.project_price - 1,required:true, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Bid"
                   = text_field "projectId", nil, style:"display: none !important",value: @project.id
-                  = submit_tag "Bid", data: { confirm: 'Are you certain you want to bid on this project?' }, class: "btn h3-homepage px-3 px-md-5 py-3 py-md-3 ml-2 mt-3", style:"border-radius: 12px; color: white; background-color:#80d144"
-              -elsif @project.project_type == "Normal Project" && @deadline > 0
+                  = submit_tag "Bid", data: { confirm: 'Are you certain you want to bid on this project?' }, class: "btn h3-homepage px-5 px-md-5 py-3 py-md-3 ml-2 mt-3", style:"border-radius: 12px; color: white; background-color:#80d144"
+              -elsif @project.project_type == "Normal Project" && @available_deadline > 0
                 button.btn.h3-homepage.px-3.px-md-5.py-3.py-md-3.m-auto#email-submit style="border-radius: 12px; color: white; background-color:#80d144" type="button" data-toggle="modal" Accept Project
           p.h3-homepage.sub-header-font.mt-3 
             | Project Deadline: 
             =@deadline
+            |  Days
+          p.h3-homepage.sub-header-font.mt-3 
+            | Project Available Deadline (when will this project close): 
+            =@available_deadline
             |  Days
           p.h3-homepage.sub-header-font.mt-3.text-center 
             - name = @user.first_name.to_s + " " + @user.last_name.to_s
