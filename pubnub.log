@@ -1,0 +1,45 @@
+# Logfile created on 2022-07-09 11:10:29 +0800 by logger.rb/61378
+D, [2022-07-09T11:10:29.559509 #2128] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T11:10:29.559744 #2128] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T11:52:05.775354 #3396] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T11:52:05.775591 #3396] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T11:52:39.336307 #3534] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T11:52:39.336559 #3534] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:04:12.852427 #4482] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:04:12.852778 #4482] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:04:18.964626 #4052] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:04:18.964839 #4052] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:04:20.695780 #4509] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:04:20.696377 #4509] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:04:33.854094 #4052] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:04:33.854200 #4052] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:04:35.652068 #4575] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:04:35.652334 #4575] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:05:34.051401 #4631] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:05:34.051566 #4631] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:06:31.972146 #4052] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:06:31.972252 #4052] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:06:36.839587 #4052] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:06:36.839686 #4052] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:21:52.346804 #4052] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:21:52.346912 #4052] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:22:40.780337 #4052] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:22:40.780437 #4052] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:24:15.186759 #4052] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:24:15.186870 #4052] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:24:42.759438 #4052] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:24:42.759609 #4052] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:25:53.227254 #4052] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:25:53.227363 #4052] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:26:04.860061 #4052] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:26:04.860219 #4052] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:27:13.959399 #4052] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:27:13.959506 #4052] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:27:25.049118 #4052] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:27:25.049306 #4052] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:39:02.085431 #7037] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:39:02.085595 #7037] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:39:08.633191 #7059] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:39:08.633386 #7059] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0
+D, [2022-07-09T12:47:05.280647 #4052] DEBUG -- Pubnub::Telementry: Initialized Telemetry
+D, [2022-07-09T12:47:05.280742 #4052] DEBUG -- Pubnub::Client: Created new Pubnub::Client instance. Version: 5.0.0

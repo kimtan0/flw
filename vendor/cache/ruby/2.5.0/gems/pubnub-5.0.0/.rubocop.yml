@@ -1,0 +1,27 @@
+AllCops:
+  TargetRubyVersion: 2.4
+  Exclude:
+    - 'spec/**/*'
+    - 'examples/**/*'
+    - 'lib/pubnub/crypto.rb'
+    - 'lib/pubnub/format.rb'
+
+
+Metrics/ClassLength:
+  Max: 150
+
+Metrics/LineLength:
+  Max: 150
+
+Metrics/AbcSize:
+  Max: 30
+
+Metrics/MethodLength:
+  Max: 35
+
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
