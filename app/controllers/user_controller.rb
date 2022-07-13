@@ -362,14 +362,14 @@ class UserController < ApplicationController
       'billPriceSetting'=>1,
       'billPayorInfo'=>1,
       'billAmount'=> amount,
-      'billReturnUrl'=> "http://localhost:3000/user/my_account",
+      'billReturnUrl'=> "https://freelancer-kim1.herokuapp.com/user/my_account",
       'billTo'=> name,
       'billEmail'=> email,
       'billPhone'=> phone_number,
       'billSplitPayment'=>0,
       'billSplitPaymentArgs'=>'',
       'billPaymentChannel'=>'2',
-      'billContentEmail'=>'Thank you for purchasing our product!',
+      'billContentEmail'=>'Thank you for purchasing!',
       'billChargeToCustomer'=>1
     )
     billCode = JSON.parse(http.body)
