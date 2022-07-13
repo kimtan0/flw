@@ -46,6 +46,10 @@
                   .form-group
                     .label Project Deadline:
                     = f.date_field :project_deadline, as: :date,placeholder: "Project Deadline", value: f.object.try(:strftime,"%m/%d/%Y"), class: 'form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input', style: "border-radius:12px"
+                .col-12
+                  .form-group
+                    .label Project Available Deadline (when should this project be closed):
+                    = f.date_field :project_available_deadline, as: :date,placeholder: "Project Available Deadline", value: f.object.try(:strftime,"%m/%d/%Y"), class: 'form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input', style: "border-radius:12px"
                 .col-12.mb-3
                   .input-group
                     .custom-check.custom-check-md

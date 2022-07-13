@@ -1,0 +1,27 @@
+current directory: /mnt/c/code/flw/vendor/cache/ruby/2.5.0/gems/puma-5.6.4/ext/puma_http11
+/home/kimtan/.rbenv/versions/2.5.3/bin/ruby -I /home/kimtan/.rbenv/versions/2.5.3/lib/ruby/site_ruby/2.5.0 extconf.rb
+/home/kimtan/.rbenv/versions/2.5.3/lib/ruby/2.5.0/mkmf.rb:1554: warning: Insecure world writable dir /mnt/c in PATH, mode 040777
+using OpenSSL pkgconfig (openssl.pc)
+checking for openssl/bio.h... yes
+checking for DTLS_method() in openssl/ssl.h... yes
+checking for TLS_server_method() in openssl/ssl.h... yes
+checking for SSL_CTX_set_min_proto_version(NULL, 0) in openssl/ssl.h... yes
+checking for X509_STORE_up_ref()... yes
+checking for SSL_CTX_set_ecdh_auto(NULL, 0) in openssl/ssl.h... yes
+checking for SSL_get1_peer_certificate() in openssl/ssl.h... no
+checking for Random.bytes... no
+creating Makefile
+
+current directory: /mnt/c/code/flw/vendor/cache/ruby/2.5.0/gems/puma-5.6.4/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20220712-5165-y2j0zp sitelibdir\=./.gem.20220712-5165-y2j0zp clean
+
+current directory: /mnt/c/code/flw/vendor/cache/ruby/2.5.0/gems/puma-5.6.4/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20220712-5165-y2j0zp sitelibdir\=./.gem.20220712-5165-y2j0zp
+compiling http11_parser.c
+compiling mini_ssl.c
+compiling puma_http11.c
+linking shared-object puma/puma_http11.so
+
+current directory: /mnt/c/code/flw/vendor/cache/ruby/2.5.0/gems/puma-5.6.4/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20220712-5165-y2j0zp sitelibdir\=./.gem.20220712-5165-y2j0zp install
+/usr/bin/install -c -m 0755 puma_http11.so ./.gem.20220712-5165-y2j0zp/puma

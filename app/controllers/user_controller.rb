@@ -38,9 +38,6 @@ class UserController < ApplicationController
   end
 
   def create
-    #need to test bid with third user
-    #need to close off bid when deadline is up
-    
     project_price = (params[:project][:project_price]).to_i
     deposit_amount = project_price *10 / 100
     credit = Credit.find_by(user_id: cookies[:user_id])
@@ -104,7 +101,7 @@ class UserController < ApplicationController
     end
 
     @deadline = (@project.project_deadline - Date.today).to_i
-    
+    @available_deadline = (@project.project_available_deadline - Date.today).to_i
 
     if cookies[:user_id].present? && cookies[:user_id] == @project.project_owner_id
       @user_status = TRUE
@@ -145,7 +142,7 @@ class UserController < ApplicationController
 
     if project.project_acceptance_user_id.nil?
       owner_credit = Credit.find_by(user_id:project.project_owner_id)
-      owner_credit.upadate(balance: owner_credit.balance + project_price_10, fixed_balance: owner_credit.fixed_balance - project_price_10)
+      owner_credit.update(balance: owner_credit.balance + project_price_10, fixed_balance: owner_credit.fixed_balance - project_price_10)
       project.delete
       ProjectMilestone.find_by(project_id: params[:id]).delete
       redirect_to user_Index_path, flash: { info: "Project has been deleted" }
@@ -362,14 +359,14 @@ class UserController < ApplicationController
       'billPriceSetting'=>1,
       'billPayorInfo'=>1,
       'billAmount'=> amount,
-      'billReturnUrl'=> "http://localhost:3000/user/my_account",
+      'billReturnUrl'=> "https://freelancer-kim1.herokuapp.com/user/my_account",
       'billTo'=> name,
       'billEmail'=> email,
       'billPhone'=> phone_number,
       'billSplitPayment'=>0,
       'billSplitPaymentArgs'=>'',
       'billPaymentChannel'=>'2',
-      'billContentEmail'=>'Thank you for purchasing our product!',
+      'billContentEmail'=>'Thank you for purchasing!',
       'billChargeToCustomer'=>1
     )
     billCode = JSON.parse(http.body)
@@ -413,7 +410,7 @@ class UserController < ApplicationController
     params.required(:customer_service_request).permit(:title, :description, :user_id)
   end
   def project_params
-    params.required(:project).permit(:project_name, :project_description,:project_category, :project_type, :project_price, :project_deadline, :tag_list, :balance, :NDA)
+    params.required(:project).permit(:project_name, :project_description,:project_category, :project_type, :project_price, :project_deadline, :tag_list, :balance, :NDA, :project_available_deadline)
   end
   
   def check_user

@@ -1,0 +1,829 @@
+---
+version: "5.0.0"
+changelog:
+  - date: 2022-01-13
+    version: v5.0.0
+    changes:
+      - type: improvement
+        text: "BREAKING CHANGES: uuid is required parameter to create PubNub instance."
+  - date: 2021-12-16
+    version: v4.8.0
+    changes:
+      - type: feature
+        text: "Add revoke token feature."
+  - date: 2021-11-24
+    version: v4.7.1
+    changes:
+      - type: feature
+        text: "Add new method `all_history_messages` which return messages from requested interval or `since` / `before` date in single object."
+      - type: bug
+        text: "Fix exception raised when optional start / end not passed to `paged_history`."
+  - date: 2021-11-09
+    version: v4.7.0
+    changes:
+      - type: feature
+        text: "Grant_token allows generation of signed token with permissions for channels, channel groups and uuids."
+  -
+    changes:
+      -
+        text: "Add new `sdks` section to `.pubnub.yml` with information about available artifacts and distribution variants."
+        type: improvement
+    date: 2021-06-09
+    version: v4.6.2
+  -
+    changes:
+      -
+        text: "Exclude `spec` and `fixtures` from built gem file."
+        type: improvement
+      -
+        text: "Fix Ruby SDK repository location under `sdks` section in `.pubnub.yml`."
+        type: improvement
+      -
+        text: "Add new section to `.pubnub.yml` file with information about SDK and destribution types."
+        type: improvement
+    date: 2021-05-19
+    version: v4.6.1
+  -
+    changes:
+      -
+        text: "BREAKING CHANGE: Add randomized initialization vector usage by default for data encryption / decryption in publish / subscribe / history API calls."
+        type: feature
+      -
+        text: "Fix issue which caused Object request body encryption when `cipher_key` is set."
+        type: bug
+    date: 2021-03-08
+    version: v4.6.0
+  -
+    changes:
+      -
+        text: "Add support for APNS2 device/channel management."
+        type: feature
+      -
+        text: "Resolved issue with multiple timetokens in message counts endpoint"
+        type: bug
+    date: 2020-12-03
+    version: v4.5.0
+  -
+    changes:
+      -
+        text: "Add simplified Objects API support with UUID and Channel metadata / membership management."
+        type: feature
+      -
+        text: "Add uuid and parameter to Grant API along with new Objects permissions: `get`, `update` and `join`."
+        type: feature
+    date: 2020-10-21
+    version: v4.4.0
+  -
+    changes:
+      -
+        text: "Add `delete` permission for `channel` to Grant."
+        type: feature
+    date: 2020-10-18
+    version: v4.3.0
+  -
+    changes:
+      -
+        text: "Don't suppress runtime errors."
+        type: bug
+    date: 2020-09-14
+    version: v4.2.7
+  -
+    changes:
+      -
+        text: "History can now respond with message meta information."
+        type: feature
+      -
+        text: "Added official support for Ruby 2.7.X"
+        type: feature
+      -
+        text: "History properly decrypts messages when using the \"include_token\" parameter."
+        type: bug
+    date: 2020-08-25
+    version: v4.2.6
+  -
+    changes:
+      -
+        text: "Fixed Message Counts channel timetokens by disabling alphabetic sorting of the channels list."
+        type: bug
+    date: 2020-06-02
+    version: v4.2.5
+  -
+    changes:
+      -
+        text: "Replace event name with full endpoint path in PAM signatures, for compatibility with PAM v2 signatures."
+        type: bug
+      -
+        text: "Change paths for PAM endpoints from v1 to v2."
+        type: bug
+      -
+        text: "Update PAM signature generator to correctly sort the query string parameters based on key instead of combined key and value."
+        type: bug
+    date: 2020-05-22
+    version: v4.2.4
+  -
+    changes:
+      -
+        text: "Resolved issue with multiple timetokens in message counts endpoint"
+        type: bug
+    date: 2019-11-11
+    version: "4.2.2"
+  -
+    changes:
+      -
+        text: "Updated listener methods"
+        type: feature
+    date: 2019-10-25
+    version: "4.2.1"
+  -
+    changes:
+      -
+        text: "Added objects feature"
+        type: feature
+    date: 2019-10-11
+    version: "4.2.0"
+  -
+    changes:
+      -
+        text: "Added signal feature"
+        type: feature
+    date: 2019-08-21
+    version: "4.1.6"
+  -
+    changes:
+      -
+        text: "Updated dependencies"
+        type: improvement
+    date: 2019-07-29
+    version: "4.1.5"
+  -
+    changes:
+      -
+        text: "Added push API"
+        type: feature
+    date: 2019-04-08
+    version: "4.1.1"
+  -
+    changes:
+      -
+        text: "Added 'message_count' API endpoint"
+        type: feature
+    date: 2019-02-28
+    version: "4.1.0"
+  -
+    changes:
+      -
+        text: "Switch from Celluloid to concurrent-ruby."
+        type: bug
+    date: 2018-08-28
+    version: "4.0.28"
+  -
+    changes:
+      -
+        text: "Fixed telemetry issues."
+        type: bug
+    date: 2017-11-17
+    version: "4.0.27"
+  -
+    changes:
+      -
+        text: "Secured telemetry call. Fixed crash when an app was exiting."
+        type: bug
+    date: 2017-10-23
+    version: "4.0.26"
+  -
+    changes:
+      -
+        text: "Added telemetry"
+        type: feature
+    date: 2017-09-12
+    version: "4.0.25"
+  -
+    changes:
+      -
+        text: "Added #delete_messages method"
+        type: feature
+      -
+        text: "Improved timeout error handling (thanks @f1sherman)"
+        type: improvement
+    date: 2017-08-29
+    version: "4.0.24"
+  -
+    changes:
+      -
+        text: "Fixed HereNow envelope generation"
+        type: bug
+    date: 2017-07-26
+    version: "4.0.23"
+  -
+    changes:
+      -
+        text: "Fixed signature generation and channel name escaping"
+        type: bug
+    date: 2017-05-31
+    version: "4.0.22"
+  -
+    changes:
+      -
+        text: "Fixed signature generation"
+        type: bug
+    date: 2017-04-18
+    version: "4.0.21"
+  -
+    changes:
+      -
+        text: "origin can now be set in initialized client"
+        type: improvement
+      -
+        text: "presence interval support"
+        type: improvement
+      -
+        text: "allows using multiple cipher keys"
+        type: improvement
+    date: 2017-04-11
+    version: "4.0.20"
+  -
+    changes:
+      -
+        text: "Fixed sync subscribe not terminating actors"
+        type: bug
+    date: 2017-03-02
+    version: v4.0.18
+  -
+    changes:
+      -
+        text: "Added a bit more debug logging"
+        type: improvement
+      -
+        text: "Updated default origin"
+        type: improvement
+    date: 2016-12-21
+    version: v4.0.17
+  -
+    changes:
+      -
+        text: "Fixed missing channel group parameter in leave event"
+        type: bug
+    date: 2016-11-23
+    version: v4.0.16
+  -
+    changes:
+      -
+        text: "Fixed PAM signature when some special characters are present"
+        type: bug
+    date: 2016-11-21
+    version: v4.0.15
+  -
+    changes:
+      -
+        text: "Added ttl parameter for publish"
+        type: improvement
+    date: 2016-11-04
+    version: v4.0.14
+  -
+    changes:
+      -
+        text: "Changed init message log level to debug"
+        type: improvement
+    date: 2016-11-04
+    version: v4.0.13
+  -
+    changes:
+      -
+        text: "Added alert on catchup failure (REQUEST_MESSAGE_COUNT_EXCEEDED)"
+        type: improvement
+    date: 2016-10-31
+    version: v4.0.12
+  -
+    changes:
+      -
+        text: "Added super admin mode (Enabled when secret key is set on Pubnub::Client init)"
+        type: improvement
+    date: 2016-10-31
+    version: v4.0.11
+  -
+    changes:
+      -
+        text: "Better single events timeout handling"
+        type: improvement
+      -
+        text: "DRYed envelope formatting a bit"
+        type: improvement
+    date: 2016-10-31
+    version: v4.0.10
+  -
+    changes:
+      -
+        text: "Removed json dependency"
+        type: improvement
+      -
+        text: "Updated dependecies"
+        type: improvement
+    date: 2016-10-31
+    version: v4.0.9
+  -
+    changes:
+      -
+        text: "Updated dry-validation."
+        type: improvement
+      -
+        text: "Dropped support for ruby 2.0."
+        type: improvement
+    date: 2016-10-31
+    version: v4.0.8
+  -
+    changes:
+      -
+        text: "Added message decrypting in history."
+        type: improvement
+    date: 2016-08-23
+    version: v4.0.7
+  -
+    changes:
+      -
+        text: "channel and channels are the same argument."
+        type: improvement
+      -
+        text: "channel_group and channel_groups are the same argument."
+        type: improvement
+      -
+        text: "added `with_presence` flag for subscribe, default false."
+        type: improvement
+    date: 2016-08-17
+    version: v4.0.6
+  -
+    changes:
+      -
+        text: "Required CGI."
+        type: improvement
+    date: 2016-08-17
+    version: v4.0.5
+  -
+    changes:
+      -
+        text: "Added #subscribe_filter for client"
+        type: feature
+    date: 2016-08-17
+    version: v4.0.2
+  -
+    changes:
+      -
+        text: "Updated dry-validation and EnvelopeSchema."
+        type: improvement
+    date: 2016-08-17
+    version: v4.0.1
+  -
+    changes:
+      -
+        text: "Removed auth_key and uuid setters (#set_auth_key,"
+        type: feature
+      -
+        text: Added
+        type: improvement
+    date: 2016-08-17
+    version: v4.0.0
+  -
+    changes:
+      -
+        text: "Restored auth_key and uuid setters. Important notice: they will be removed"
+        type: improvement
+    date: 2016-08-17
+    version: v3.8.3
+  -
+    changes:
+      -
+        text: "Added :include_token parameter to history call."
+        type: feature
+    date: 2016-08-17
+    version: v3.8.2
+  -
+    changes:
+      -
+        text: "Updated celluloid dependency."
+        type: improvement
+    date: 2016-08-17
+    version: v3.8.1
+  -
+    changes:
+      -
+        text: "Release of celluloid version of pubnub gem. It's complete rewrite but public API doesn't change."
+        type: improvement
+    date: 2017-08-17
+    version: v3.8.0
+features:
+  access:
+    - ACCESS-GRANT
+    - ACCESS-SECRET-KEY-ALL-ACCESS
+    - ACCESS-GRANT-TOKEN
+    - ACCESS-PARSE-TOKEN
+    - ACCESS-SET-TOKEN
+    - ACCESS-REVOKE-TOKEN
+  channel-groups:
+    - CHANNEL-GROUPS-ADD-CHANNELS
+    - CHANNEL-GROUPS-REMOVE-CHANNELS
+    - CHANNEL-GROUPS-REMOVE-GROUPS
+    - CHANNEL-GROUPS-LIST-CHANNELS-IN-GROUP
+  notify:
+    - REQUEST-MESSAGE-COUNT-EXCEEDED
+  presence:
+    - PRESENCE-HERE-NOW
+    - PRESENCE-WHERE-NOW
+    - PRESENCE-SET-STATE
+    - PRESENCE-GET-STATE
+    - PRESENCE-HEARTBEAT
+  publish:
+    - PUBLISH-STORE-FLAG
+    - PUBLISH-RAW-JSON
+    - PUBLISH-WITH-METADATA
+    - PUBLISH-GET
+    - PUBLISH-POST
+    - PUBLISH-SYNC
+    - PUBLISH-ASYNC
+    - PUBLISH-MESSAGE-TTL
+  push:
+    - PUSH-ADD-DEVICE-TO-CHANNELS
+    - PUSH-REMOVE-DEVICE-FROM-CHANNELS
+    - PUSH-LIST-CHANNELS-FROM-DEVICE
+    - PUSH-REMOVE-DEVICE
+    - PUSH-TYPE-APNS
+    - PUSH-TYPE-APNS2
+    - PUSH-TYPE-FCM
+    - PUSH-TYPE-MPNS
+  storage:
+    - STORAGE-REVERSE
+    - STORAGE-INCLUDE-TIMETOKEN
+    - STORAGE-START-END
+    - STORAGE-COUNT
+    - STORAGE-DELETE-MESSAGES
+    - STORAGE-MESSAGE-COUNT
+  subscribe:
+    - SUBSCRIBE-CHANNELS
+    - SUBSCRIBE-CHANNEL-GROUPS
+    - SUBSCRIBE-PRESENCE-CHANNELS
+    - SUBSCRIBE-PRESENCE-CHANNELS-GROUPS
+    - SUBSCRIBE-WITH-TIMETOKEN
+    - SUBSCRIBE-WILDCARD
+    - SUBSCRIBE-FILTER-EXPRESSION
+    - SUBSCRIBE-SIGNAL-LISTENER
+    - SUBSCRIBE-MEMBERSHIP-LISTENER
+    - SUBSCRIBE-OBJECTS-CHANNEL-LISTENER
+    - SUBSCRIBE-OBJECTS-UUID-LISTENER
+  signal:
+    - SIGNAL-SEND
+  objects:
+    - OBJECTS-GET-ALL-UUID-METADATA
+    - OBJECTS-GET-UUID-METADATA
+    - OBJECTS-SET-UUID-METADATA
+    - OBJECTS-REMOVE-UUID-METADATA
+    - OBJECTS-GET-ALL-CHANNEL-METADATA
+    - OBJECTS-GET-CHANNEL-METADATA
+    - OBJECTS-SET-CHANNEL-METADATA
+    - OBJECTS-REMOVE-CHANNEL-METADATA
+    - OBJECTS-GET-MEMBERSHIPS-V2
+    - OBJECTS-SET-MEMBERSHIPS-V2
+    - OBJECTS-REMOVE-MEMBERSHIPS-V2
+    - OBJECTS-MANAGE-MEMBERSHIPS-V2
+    - OBJECTS-GET-CHANNEL-MEMBERS-V2
+    - OBJECTS-SET-CHANNEL-MEMBERS-V2
+    - OBJECTS-REMOVE-CHANNEL-MEMBERS-V2
+    - OBJECTS-MANAGE-CHANNEL-MEMBERS-V2
+    - OBJECTS-FILTERING
+    - OBJECTS-SORTING
+  time:
+    - TIME-TIME
+name: ruby
+schema: 1
+scm: github.com/pubnub/ruby
+supported-platforms:
+  -
+    editors:
+      - "ruby 2.6"
+      - "ruby 2.5"
+      - "ruby 2.4"
+    platforms:
+      - "FreeBSD 8-STABLE or later, amd64, 386"
+      - "Linux 2.6 or later, amd64, 386"
+      - "macOS 10.8 or later, amd64"
+      - "Windows 7 or later, amd64, 386, use rubyinstaller and dev pack"
+      - "Apart from the above, the PubNub Ruby SDK works on almost every platform where the supported Ruby versions work. To use an SSL connection, Ruby should be compiled with OpenSSL support."
+    version: "PubNub Ruby SDK"
+
+sdks:
+  - full-name: Ruby SDK
+    short-name: Ruby
+    artifacts:
+      - artifact-type: api-client
+        language: Ruby
+        tier: 1
+        tags:
+          - Server
+        source-repository: https://github.com/pubnub/ruby
+        documentation: https://www.pubnub.com/docs/sdks/ruby
+        distributions:
+          - distribution-type: source
+            distribution-repository: GitHub
+            package-name: PubNub Ruby SDK
+            location: https://github.com/pubnub/ruby
+            requires:
+              - name: addressable
+                min-version: 2.0.0
+                max-version: 2.7.0
+                location: https://rubygems.org/gems/addressable
+                license: Apache License 2.0
+                license-url: https://github.com/sporkmonger/addressable/blob/main/LICENSE.txt
+                is-required: Required
+                notes: Will be installed along with SDK
+              - name: concurrent-ruby
+                min-version: 1.1.5
+                max-version: 1.1.6
+                location: https://rubygems.org/gems/concurrent-ruby
+                license: MIT License
+                license-url: https://github.com/ruby-concurrency/concurrent-ruby/blob/master/LICENSE.txt
+                is-required: Required
+                notes: Will be installed along with SDK
+              - name: concurrent-ruby-edge
+                min-version: 0.5.0
+                max-version: 0.5.0
+                location: https://rubygems.org/gems/concurrent-ruby-edge
+                license: MIT License
+                license-url: https://github.com/ruby-concurrency/concurrent-ruby/blob/master/LICENSE.txt
+                is-required: Required
+                notes: Will be installed along with SDK
+              - name: dry-validation
+                min-version: 1.0.0
+                max-version: 1.5.3
+                location: https://rubygems.org/gems/dry-validation
+                license: MIT License
+                license-url: https://github.com/dry-rb/dry-validation/blob/master/LICENSE
+                is-required: Required
+                notes: Will be installed along with SDK
+              - name: httpclient
+                min-version: 2.8.3
+                max-version: 2.8.3
+                location: https://rubygems.org/gems/httpclient
+                license: Ruby License
+                license-url: https://github.com/nahi/httpclient#license
+                is-required: Required
+                notes: Will be installed along with SDK
+              - name: json
+                min-version: 2.2.0
+                max-version: 2.3.1
+                location: https://rubygems.org/gems/json
+                license: Ruby License
+                license-url: https://github.com/flori/json/blob/master/LICENSE
+                is-required: Required
+                notes: Will be installed along with SDK
+              - name: timers
+                min-version: 4.3.0
+                max-version: 4.3.0
+                location: https://rubygems.org/gems/timers
+                license: MIT License
+                license-url: https://github.com/socketry/timers#license
+                is-required: Required
+                notes: Will be installed along with SDK
+            supported-platforms:
+              supported-operating-systems:
+                macOS:
+                  runtime-version:
+                    - Ruby 2.4.x
+                    - Ruby 2.5.x
+                    - Ruby 2.6.x
+                    - Ruby 2.7.x
+                  minimum-os-version:
+                    - OS X 10.10
+                  maximum-os-version:
+                    - macOS 11.2.3
+                  target-architecture:
+                    - arm64
+                    - x86-64
+                Windows:
+                  runtime-version:
+                    - Ruby 2.4.x
+                    - Ruby 2.5.x
+                    - Ruby 2.6.x
+                    - Ruby 2.7.x
+                  minimum-os-version:
+                    - Windows 7 Professional
+                    - Windows 7 Enterprise
+                    - Windows 7 Ultimate
+                  maximum-os-version:
+                    - Windows 10 Pro
+                    - Windows 10 Enterprise
+                  target-architecture:
+                    - x86
+                    - x86-64
+                Linux:
+                  runtime-version:
+                    - Ruby 2.4.x
+                    - Ruby 2.5.x
+                    - Ruby 2.6.x
+                    - Ruby 2.7.x
+                  minimum-os-version:
+                    - Ubuntu 16.04 LTS
+                  maximum-os-version:
+                    - Ubuntu 18.04 LTS
+                  target-architecture:
+                    - x86
+                    - x86-64
+          - distribution-type: package
+            distribution-repository: RubyGems
+            package-name: pubnub-5.0.0.gem
+            location: https://rubygems.org/gems/pubnub
+            requires:
+              - name: addressable
+                min-version: 2.0.0
+                max-version: 2.7.0
+                location: https://rubygems.org/gems/addressable
+                license: Apache License 2.0
+                license-url: https://github.com/sporkmonger/addressable/blob/main/LICENSE.txt
+                is-required: Required
+                notes: Will be installed along with SDK
+              - name: concurrent-ruby
+                min-version: 1.1.5
+                max-version: 1.1.6
+                location: https://rubygems.org/gems/concurrent-ruby
+                license: MIT License
+                license-url: https://github.com/ruby-concurrency/concurrent-ruby/blob/master/LICENSE.txt
+                is-required: Required
+                notes: Will be installed along with SDK
+              - name: concurrent-ruby-edge
+                min-version: 0.5.0
+                max-version: 0.5.0
+                location: https://rubygems.org/gems/concurrent-ruby-edge
+                license: MIT License
+                license-url: https://github.com/ruby-concurrency/concurrent-ruby/blob/master/LICENSE.txt
+                is-required: Required
+                notes: Will be installed along with SDK
+              - name: dry-validation
+                min-version: 1.0.0
+                max-version: 1.5.3
+                location: https://rubygems.org/gems/dry-validation
+                license: MIT License
+                license-url: https://github.com/dry-rb/dry-validation/blob/master/LICENSE
+                is-required: Required
+                notes: Will be installed along with SDK
+              - name: httpclient
+                min-version: 2.8.3
+                max-version: 2.8.3
+                location: https://rubygems.org/gems/httpclient
+                license: Ruby License
+                license-url: https://github.com/nahi/httpclient#license
+                is-required: Required
+                notes: Will be installed along with SDK
+              - name: json
+                min-version: 2.2.0
+                max-version: 2.3.1
+                location: https://rubygems.org/gems/json
+                license: Ruby License
+                license-url: https://github.com/flori/json/blob/master/LICENSE
+                is-required: Required
+                notes: Will be installed along with SDK
+              - name: timers
+                min-version: 4.3.0
+                max-version: 4.3.0
+                location: https://rubygems.org/gems/timers
+                license: MIT License
+                license-url: https://github.com/socketry/timers#license
+                is-required: Required
+                notes: Will be installed along with SDK
+            supported-platforms:
+              supported-operating-systems:
+                macOS:
+                  runtime-version:
+                    - Ruby 2.4.x
+                    - Ruby 2.5.x
+                    - Ruby 2.6.x
+                    - Ruby 2.7.x
+                  minimum-os-version:
+                    - OS X 10.10
+                  maximum-os-version:
+                    - macOS 11.2.3
+                  target-architecture:
+                    - arm64
+                    - x86-64
+                Windows:
+                  runtime-version:
+                    - Ruby 2.4.x
+                    - Ruby 2.5.x
+                    - Ruby 2.6.x
+                    - Ruby 2.7.x
+                  minimum-os-version:
+                    - Windows 7 Professional
+                    - Windows 7 Enterprise
+                    - Windows 7 Ultimate
+                  maximum-os-version:
+                    - Windows 10 Pro
+                    - Windows 10 Enterprise
+                  target-architecture:
+                    - x86
+                    - x86-64
+                Linux:
+                  runtime-version:
+                    - Ruby 2.4.x
+                    - Ruby 2.5.x
+                    - Ruby 2.6.x
+                    - Ruby 2.7.x
+                  minimum-os-version:
+                    - Ubuntu 16.04 LTS
+                  maximum-os-version:
+                    - Ubuntu 18.04 LTS
+                  target-architecture:
+                    - x86
+                    - x86-64
+          - distribution-type: library
+            distribution-repository: GitHub release
+            package-name: pubnub-5.0.0.gem
+            location: https://github.com/pubnub/ruby/releases/download/v5.0.0/pubnub-5.0.0.gem
+            requires:
+              - name: addressable
+                min-version: 2.0.0
+                max-version: 2.7.0
+                location: https://rubygems.org/gems/addressable
+                license: Apache License 2.0
+                license-url: https://github.com/sporkmonger/addressable/blob/main/LICENSE.txt
+                is-required: Required
+              - name: concurrent-ruby
+                min-version: 1.1.5
+                max-version: 1.1.6
+                location: https://rubygems.org/gems/concurrent-ruby
+                license: MIT License
+                license-url: https://github.com/ruby-concurrency/concurrent-ruby/blob/master/LICENSE.txt
+                is-required: Required
+              - name: concurrent-ruby-edge
+                min-version: 0.5.0
+                max-version: 0.5.0
+                location: https://rubygems.org/gems/concurrent-ruby-edge
+                license: MIT License
+                license-url: https://github.com/ruby-concurrency/concurrent-ruby/blob/master/LICENSE.txt
+                is-required: Required
+              - name: dry-validation
+                min-version: 1.0.0
+                max-version: 1.5.3
+                location: https://rubygems.org/gems/dry-validation
+                license: MIT License
+                license-url: https://github.com/dry-rb/dry-validation/blob/master/LICENSE
+                is-required: Required
+              - name: httpclient
+                min-version: 2.8.3
+                max-version: 2.8.3
+                location: https://rubygems.org/gems/httpclient
+                license: Ruby License
+                license-url: https://github.com/nahi/httpclient#license
+                is-required: Required
+              - name: json
+                min-version: 2.2.0
+                max-version: 2.3.1
+                location: https://rubygems.org/gems/json
+                license: Ruby License
+                license-url: https://github.com/flori/json/blob/master/LICENSE
+                is-required: Required
+              - name: timers
+                min-version: 4.3.0
+                max-version: 4.3.0
+                location: https://rubygems.org/gems/timers
+                license: MIT License
+                license-url: https://github.com/socketry/timers#license
+                is-required: Required
+            supported-platforms:
+              supported-operating-systems:
+                macOS:
+                  runtime-version:
+                    - Ruby 2.4.x
+                    - Ruby 2.5.x
+                    - Ruby 2.6.x
+                    - Ruby 2.7.x
+                  minimum-os-version:
+                    - OS X 10.10
+                  maximum-os-version:
+                    - macOS 11.2.3
+                  target-architecture:
+                    - arm64
+                    - x86-64
+                Windows:
+                  runtime-version:
+                    - Ruby 2.4.x
+                    - Ruby 2.5.x
+                    - Ruby 2.6.x
+                    - Ruby 2.7.x
+                  minimum-os-version:
+                    - Windows 7 Professional
+                    - Windows 7 Enterprise
+                    - Windows 7 Ultimate
+                  maximum-os-version:
+                    - Windows 10 Pro
+                    - Windows 10 Enterprise
+                  target-architecture:
+                    - x86
+                    - x86-64
+                Linux:
+                  runtime-version:
+                    - Ruby 2.4.x
+                    - Ruby 2.5.x
+                    - Ruby 2.6.x
+                    - Ruby 2.7.x
+                  minimum-os-version:
+                    - Ubuntu 16.04 LTS
+                  maximum-os-version:
+                    - Ubuntu 18.04 LTS
+                  target-architecture:
+                    - x86
+                    - x86-64
