@@ -101,7 +101,12 @@ class UserController < ApplicationController
     end
 
     @deadline = (@project.project_deadline - Date.today).to_i
-    @available_deadline = (@project.project_available_deadline - Date.today).to_i
+
+    if (@project.project_available_deadline - Date.today).to_i > 0
+      @available_deadline = (@project.project_available_deadline - Date.today).to_i
+    else
+      @available_deadline = 0
+    end
 
     if cookies[:user_id].present? && cookies[:user_id] == @project.project_owner_id
       @user_status = TRUE
