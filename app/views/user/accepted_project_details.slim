@@ -42,21 +42,22 @@
             .progress-bar.p.h3-homepage role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progressBar"
               =@width 
               |%
-          = form_tag update_accepted_project_details_path do
-            p.h3-homepage.sub-header-font.mt-3.text-left New Project Progress :
-            .input-group
-              = number_field_tag "project_milestone", nil,min:0, max:100, required:TRUE ,class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Percentage"
-              = text_field "projectId", nil, style:"display: none !important",value: @project.id
-            p.h3-homepage.sub-header-font.mt-3.text-left New Project Progress Details:
-            .input-group
-              = text_area_tag "newprojectprogressdetails",nil, placeholder: 'New Project Progress', cols:10, rows:5, required:TRUE ,class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px"
-            .row
-              .col-12
-                = submit_tag "Update", data: { confirm: 'Are you certain you want to update the project progress and details?' }, class: "btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3 w-100", style:"border-radius: 12px; color: white; background-color:#80d144"
-              .col-12
-                = link_to "Cancel Project", cancel_confirmation_path(@project.id), class: "btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3 mr-2 w-100", style:"border-radius: 12px; color: white; background-color:#80d144"
-              .col-12 
-                = link_to "Completed Project", complete_confirmation_path(@project.id), class: "btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3 mr-2 mb-3 w-100", style:"border-radius: 12px; color: white; background-color:#80d144"
+          -if @project.project_status != "Completed"
+            = form_tag update_accepted_project_details_path do
+              p.h3-homepage.sub-header-font.mt-3.text-left New Project Progress :
+              .input-group
+                = number_field_tag "project_milestone", nil,min:0, max:100, required:TRUE ,class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Percentage"
+                = text_field "projectId", nil, style:"display: none !important",value: @project.id
+              p.h3-homepage.sub-header-font.mt-3.text-left New Project Progress Details:
+              .input-group
+                = text_area_tag "newprojectprogressdetails",nil, placeholder: 'New Project Progress', cols:10, rows:5, required:TRUE ,class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px"
+              .row
+                .col-12
+                  = submit_tag "Update", data: { confirm: 'Are you certain you want to update the project progress and details?' }, class: "btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3 w-100", style:"border-radius: 12px; color: white; background-color:#80d144"
+                .col-12
+                  = link_to "Cancel Project", cancel_confirmation_path(@project.id), class: "btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3 mr-2 w-100", style:"border-radius: 12px; color: white; background-color:#80d144"
+                .col-12 
+                  = link_to "Completed Project", complete_confirmation_path(@project.id), class: "btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3 mr-2 mb-3 w-100", style:"border-radius: 12px; color: white; background-color:#80d144"
 
 javascript:
 

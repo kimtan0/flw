@@ -70,7 +70,7 @@
             p.h3-homepage.sub-header-font.mt-3.text-left Project Progress Details:
             .input-group
               = text_area_tag "message",nil, readonly:true, id: 'project_progress', placeholder: 'Project Progress', cols:10, rows:5 ,class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px"
-          - if @user_status.present? && @project.project_status == "Completed"
+          - if @user_status.present? && @project.project_status == "Completed" && @project.user_rate == false
             = simple_form_for :complete, url: rate_freelancer_path(:id => @project.id), method: "POST" do |f|
                   .row
                     .col-12

@@ -4,9 +4,8 @@ class UserController < ApplicationController
   before_action :topup_status, only: [:my_account]
 
   def Index
-    rawProject = Project.where(project_acceptance_user_id: nil).or(Project.where(project_type: 'Bid'))
-    preprocessProject = rawProject.where("project_deadline > ?", Date.today)
-
+    preprocessProject = Project.where(project_acceptance_user_id: nil).or(Project.where(project_type: 'Bid').and(Project.where("project_deadline > ?", Date.today).and(Project.where('project_status != ?', "Completed"))))
+    
     if params["search"]
       if !params["search"]["PC"].blank? && !params["search"]["PDC"].blank?
         @filter = params["search"]["PC"].concat(params["search"]["PDC"]).flatten.reject(&:blank?)
@@ -80,6 +79,7 @@ class UserController < ApplicationController
   
   def project_details
     @project = Project.find(params[:id])
+    @deadline = (@project.project_deadline - Date.today).to_i
 
     if @project.project_acceptance_user_id.nil?
       @user = User.find(@project.project_owner_id)
@@ -99,8 +99,6 @@ class UserController < ApplicationController
       @actual_rating = (rating.rating / rating.rating_count).to_i
       @actual_rating_count = rating.rating_count
     end
-
-    @deadline = (@project.project_deadline - Date.today).to_i
 
     if (@project.project_available_deadline - Date.today).to_i > 0
       @available_deadline = (@project.project_available_deadline - Date.today).to_i
@@ -165,6 +163,11 @@ class UserController < ApplicationController
   end
 
   def bid
+    #When does bid project project_status becomes "In Progress", is it even necessary
+    #Need to change the project owner's Credit with each bid
+    #Grab Original Project price, start calculation from there
+    # Amount to add to Balance = 10% of original Project Price - 10% of new Project Price
+    # Amount to reduce from Fixed Balance = 10% of original Project Price - 10% of new Project Price
     Project.find_by(id: params[:projectId]).update(project_price: params[:project_price], project_acceptance_user_id: cookies[:user_id])
     redirect_to user_Index_path, flash: { info: "Successfully bid on Project" }
   end
@@ -271,6 +274,7 @@ class UserController < ApplicationController
       credit.update(balance: balance, fixed_balance: fixed_balance)
       freelancer = Credit.find_by(user_id: project.project_acceptance_user_id)
       freelancer.update(balance: freelancer.balance + project_price - project_price_02)
+      project.update(user_rate: TRUE)
     end
 
     project_owner_tier = MemberTierList.find_by(user_id: project.project_owner_id)

@@ -38,7 +38,7 @@
                       = select_tag 'projectDetaildCategory', options_for_select(education_training_category, :selected => 0), prompt: "Project Detailed Category", class: "form-control form-control-lg p-homepage mb-sm-3 custom-select checkout-input", style: "border-radius:12px"
                 .col-12
                   .input-group
-                  = f.select :project_type, raw("<option>Normal Project</option><option>Competition</option><option>Bid</option>"), {prompt: "Project Type"}, class: "form-control form-control-lg p-homepage mt-2 mt-sm-0 mb-sm-3 custom-select checkout-input", style: "border-radius:12px"
+                  = f.select :project_type, raw("<option>Normal Project</option><option>Bid</option>"), {prompt: "Project Type"}, class: "form-control form-control-lg p-homepage mt-2 mt-sm-0 mb-sm-3 custom-select checkout-input", style: "border-radius:12px"
                 .col-12
                   .input-group
                     = f.number_field :project_price, required: true, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Project Price"
