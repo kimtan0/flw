@@ -47,9 +47,13 @@
                   .form-group
                     .label Project Deadline:
                     = f.date_field :project_deadline, as: :date,placeholder: "Project Deadline", value: f.object.try(:strftime,"%m/%d/%Y"), class: 'form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input', style: "border-radius:12px"
+                .col-12
+                  .form-group
+                    .label Project Available Deadline (when should this project be closed):
+                    = f.date_field :project_available_deadline, as: :date,placeholder: "Project Available Deadline", value: f.object.try(:strftime,"%m/%d/%Y"), class: 'form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input', style: "border-radius:12px"
               .row.row-homepage.mt-0.mt-lg-4
                 .col-12.col-lg-3.d-flex.justify-content-center.justify-content-sm-start.align-items-center
-                  = link_to "Back", user_project_category_path, class:"btn btn-dark btn-outline-secondary h3-homepage px-5 px-md-4 px-sm-4 py-sm-2 mt-3 mt-sm-2 login-button-font w-100", style: 'border-radius: 12px; color: white;'
+                  = link_to "Back", user_Index_path, class:"btn btn-dark btn-outline-secondary h3-homepage px-5 px-md-4 px-sm-4 py-sm-2 mt-3 mt-sm-2 login-button-font w-100", style: 'border-radius: 12px; color: white;'
                 .col-0.col-lg-4
                 .col-12.col-lg-5.d-flex.justify-content-center.justify-content-sm-end.align-items-center
                   = f.submit "Save", class: 'btn btn-dark btn-outline-secondary h3-homepage px-5 px-md-4 px-sm-4 py-sm-2 mt-3 mt-sm-2 login-button-font w-100', style: 'border-radius: 12px; color: white;'
