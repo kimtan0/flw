@@ -48,7 +48,7 @@ class AdminController < ApplicationController
     project_price = project.project_price
     project_price_10 = project_price *10 /100
     owner_credit = Credit.find_by(user_id:project.project_owner_id)
-    owner_credit.upadate(balance: owner_credit.balance + project_price_10, fixed_balance: owner_credit.fixed_balance - project_price_10)
+    owner_credit.update(balance: owner_credit.balance + project_price_10, fixed_balance: owner_credit.fixed_balance - project_price_10)
 
     if !project.project_acceptance_user_id.nil?
       project_price_5 = project_price *5 /100

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_13_094421) do
+ActiveRecord::Schema.define(version: 2022_07_14_150319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2022_07_13_094421) do
   create_table "project_milestones", force: :cascade do |t|
     t.integer "project_id"
     t.integer "project_milestone_percentage", default: 0
-    t.string "project_milestone_description"
+    t.string "project_milestone_description", default: ""
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2022_07_13_094421) do
     t.date "project_deadline"
     t.boolean "NDA", default: false
     t.date "project_available_deadline"
+    t.boolean "user_rate", default: false
   end
 
   create_table "ratings", force: :cascade do |t|

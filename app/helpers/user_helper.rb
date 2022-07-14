@@ -1,10 +1,4 @@
 module UserHelper
-  #programming
-  #Design
-  #Business
-  #Marketing
-  #Finance
-  #Education & Training
 
   def project_category
     [
