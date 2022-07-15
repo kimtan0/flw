@@ -117,6 +117,40 @@ class HomeController < ApplicationController
   def privacy_policy
   end
 
+  def password_recovery
+  end
+
+  def forgot_password
+    user = User.find_by(email: params[:email])
+    if user.blank?
+      redirect_to home_password_recovery_path, flash: { notice: "Email does not exist." }
+    else
+      
+      new_password = SecureRandom.base36
+      user.update(password: new_password)
+      HomepageMailer.with(email: params[:email], new_password: new_password).forgot_password.deliver_now
+      redirect_to home_login_path, flash: { info: "Check your email for the new password." }
+    end
+  end
+
+  def update_password
+  end
+
+  def update
+    new_password = params[:new_password]
+    confirm_new_password = params[:confirm_new_password]
+    if new_password == confirm_new_password
+      user = User.find(cookies[:user_id])
+      if user.authenticate(params[:password])
+        user.update(password: params[:new_password])
+        redirect_to user_my_account_path, flash: {info: "Password has been updated."}
+      else
+        redirect_to home_update_password_path, notice: "Wrong password."
+      end
+    else
+      redirect_to home_update_password_path, notice: "Password does not match."
+    end
+  end
 
   private
   

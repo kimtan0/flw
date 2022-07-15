@@ -18,8 +18,12 @@
                   = email_field_tag "email", nil, required: true, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px", placeholder: "Enter your email"
                   = password_field_tag "password", nil, required: true, class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 mt-2 checkout-input", style: "border-radius:12px", placeholder: "Enter your password"
                   .row.row-homepage.mt-2.mt-sm-4
-                    .col-12.col-sm-6.pt-2.pt-sm-3.d-flex.justify-content-center.justify-content-sm-start.align-items-center
-                      = link_to "Don’t have an account ?", home_register_path, {class:"register-link"}
+                    .col-12.col-sm-6.pt-2.pt-sm-3
+                      .row.row-homepage
+                        .col-12.d-flex.justify-content-center.justify-content-sm-start.align-items-center
+                          = link_to "Don't have an account ?", home_register_path, {class:"register-link"}
+                        .col-12.mt-2.d-flex.justify-content-center.justify-content-sm-start.align-items-center
+                          = link_to "Forgot your password ?", home_password_recovery_path, {class:"register-link"}  
                     .col-12.col-sm-6.d-flex.justify-content-center.justify-content-sm-end.align-items-center
                       = submit_tag "Login", class: 'btn btn-dark btn-outline-secondary h3-homepage px-5 px-md-4 px-sm-4 py-sm-2 mt-3 mt-sm-2 login-button-font', style: 'border-radius: 12px; color: white;'
 

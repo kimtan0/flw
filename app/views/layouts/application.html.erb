@@ -33,7 +33,7 @@
       <%= render partial: "layouts/user_header" %>
     <% elsif cookies[:admin_id].present?%>
       <%= render partial: "layouts/admin_header" %>
-    <% elsif controller.action_name != "login" && controller.action_name != "register"%>
+    <% elsif controller.action_name != "login" && controller.action_name != "register" && controller.action_name != "password_recovery"%>
       <%= render partial: "layouts/header" %>
     <% end %>
 

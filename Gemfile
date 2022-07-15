@@ -11,6 +11,8 @@ gem 'pubnub', '~> 5.0.0'
 gem 'pg', '~> 1.4', '>= 1.4.1'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap', '~> 5.0.0'
+# Mailer
+gem 'postmark-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.5', '>= 6.1.5.1'
 # Use sqlite3 as the database for Active Record

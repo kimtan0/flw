@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   post 'home/edit', to: 'home#save'
   get 'home/about_us', to: 'home#about'
   get 'home/privacy', to: 'home#privacy_policy'
+  get 'home/password_recovery', to: "home#password_recovery"
+  post 'home/password_recovery', to: "home#forgot_password", as: :forgot_password
 
+  get 'home/update_password', to: "home#update_password"
+  post 'home/update_password', to: "home#update", as: :update
   resources :home
 
   #Admin Controller
