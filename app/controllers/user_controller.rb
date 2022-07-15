@@ -4,7 +4,7 @@ class UserController < ApplicationController
   before_action :topup_status, only: [:my_account]
 
   def Index
-    preprocessProject = Project.where(project_acceptance_user_id: nil).or(Project.where(project_type: 'Bid').and(Project.where("project_deadline > ?", Date.today).and(Project.where('project_status != ?', "Completed"))))
+    preprocessProject = Project.where(project_acceptance_user_id: nil).or(Project.where(project_type: 'Bid').and(Project.where("project_available_deadline > ?", Date.today)))
     
     if params["search"]
       if !params["search"]["PC"].blank? && !params["search"]["PDC"].blank?
@@ -163,12 +163,14 @@ class UserController < ApplicationController
   end
 
   def bid
-    #When does bid project project_status becomes "In Progress", is it even necessary
-    #Need to change the project owner's Credit with each bid
-    #Grab Original Project price, start calculation from there
-    # Amount to add to Balance = 10% of original Project Price - 10% of new Project Price
-    # Amount to reduce from Fixed Balance = 10% of original Project Price - 10% of new Project Price
-    Project.find_by(id: params[:projectId]).update(project_price: params[:project_price], project_acceptance_user_id: cookies[:user_id])
+    project = Project.find_by(id: params[:projectId])
+    credit = Credit.find_by(user_id: project.project_owner_id)
+    project_price = project.project_price
+    project_original_price_10 = project_price *10 /100
+    preprocess_project_new_price_10 = (params[:project_price]).to_i
+    project_new_price_10 = preprocess_project_new_price_10 *10 /100
+    credit.update(balance: credit.balance + project_original_price_10 - project_new_price_10, fixed_balance: credit.fixed_balance - project_original_price_10 + project_new_price_10)
+    project.update(project_price: params[:project_price], project_acceptance_user_id: cookies[:user_id])
     redirect_to user_Index_path, flash: { info: "Successfully bid on Project" }
   end
 
