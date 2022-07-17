@@ -77,6 +77,17 @@
 
 javascript:
 
+  var pubnub = new PubNub({
+      publishKey: "#{@publishKey}",
+      subscribeKey: "#{@subscribeKey}",
+      uuid: "#{@user_uuid}"
+  });
+
+  pubnub.subscribe({
+    channels: ["my_channel"],
+    withPresence: true
+  });
+
   $(function() {
     setTimeout(function(){
       $('.alert').slideUp(500);

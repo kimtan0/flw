@@ -82,6 +82,11 @@ Rails.application.routes.draw do
   get 'user/customer_service', to: "user#customer_service"
   post 'user/customer_service', to: "user#customer_service_request", as: :request
 
+  get 'user/chat', to: "user#chat"
+  post 'user/profile', to: "user#chat", as: :chat
+
+  post 'user/notification', to: "user#notification", as: :notification
+
   resources :user
   
 end

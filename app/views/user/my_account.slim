@@ -86,4 +86,14 @@ javascript:
     document.getElementById("progressBar").style.width = "100%";
   }
 
+  var pubnub = new PubNub({
+      publishKey: "#{@publishKey}",
+      subscribeKey: "#{@subscribeKey}",
+      uuid: "#{@user_uuid}"
+  });
+
+  pubnub.subscribe({
+    channels: ["my_channel"],
+    withPresence: true
+  });
   
