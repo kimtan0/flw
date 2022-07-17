@@ -20,3 +20,16 @@
                 .col-12.col-lg-5.d-flex.justify-content-center.justify-content-sm-end.align-items-center
                   = f.submit "Send Request", class: 'btn btn-dark btn-outline-secondary h3-homepage px-5 px-md-4 px-sm-4 py-sm-2 mt-3 mt-sm-2 login-button-font w-100', style: 'border-radius: 12px; color: white;'
       .col-2.col-sm-3
+
+javascript:
+
+  var pubnub = new PubNub({
+      publishKey: "#{@publishKey}",
+      subscribeKey: "#{@subscribeKey}",
+      uuid: "#{@user_uuid}"
+  });
+
+  pubnub.subscribe({
+    channels: ["my_channel"],
+    withPresence: true
+  });

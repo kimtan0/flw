@@ -1,7 +1,8 @@
 class UserController < ApplicationController
 
-  before_action :check_user, only: [:project, :project_category, :accept_project, :project_details, :my_project, :my_account, :customer_service_category, :customer_service]
+  before_action :check_user, only: [:project, :project_category, :accept_project, :project_details, :my_project, :my_account, :customer_service_category, :customer_service, :chat]
   before_action :topup_status, only: [:my_account]
+  before_action :chat_presence, only: [:project, :project_category, :accept_project, :project_details, :my_project, :my_account, :customer_service_category, :customer_service, :chat]
 
   def Index
     preprocessProject = Project.where(project_acceptance_user_id: nil).or(Project.where(project_type: 'Bid').and(Project.where("project_available_deadline > ?", Date.today)))
@@ -24,6 +25,17 @@ class UserController < ApplicationController
     if cookies[:project_category].present?
       cookies.delete :project_category
     end
+
+    if cookies[:user_id].present?
+      notifications = UserNotification.where(user_id: cookies[:user_id]).order(created_at: :desc).limit(20)
+      noti = UserNotification.find_by(user_id: cookies[:user_id])
+      if !notifications.blank?
+        @notifications = notifications
+        user = User.find(noti.id)
+        @name = user.first_name.to_s + " " + user.last_name.to_s
+      end
+    end
+
   end
 
   def project_category
@@ -414,6 +426,16 @@ class UserController < ApplicationController
     redirect_to user_Index_path, flash: { info: "Customer Service Request has been submitted. Our Customer Service will contact you." }
   end
 
+  def chat
+    @target_user = User.find(params[:id])
+    @name = User.find(cookies[:user_id]).first_name
+  end
+
+  def notification
+    user = User.find(params[:id])
+    UserNotification.new(user_id: params[:id]).save
+  end
+
 
   private
 
@@ -443,6 +465,12 @@ class UserController < ApplicationController
         redirect_to user_my_account_path,flash: { notice: "Failed to topup, please check your bank account balance." }
       end
     end
+  end
+
+  def chat_presence
+    @user_uuid = User.find(cookies[:user_id]).uuid
+    @publishKey = "pub-c-6c775362-cd2d-4b19-a805-6953eff53cb3"
+    @subscribeKey = "sub-c-c8723627-07b7-4f78-9658-ccc6d78723db"
   end
 
 end

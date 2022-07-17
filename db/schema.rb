@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_14_150319) do
+ActiveRecord::Schema.define(version: 2022_07_17_153715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,6 +146,12 @@ ActiveRecord::Schema.define(version: 2022_07_14_150319) do
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
+  create_table "user_notifications", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -158,7 +164,7 @@ ActiveRecord::Schema.define(version: 2022_07_14_150319) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "reference_code"
-    t.string "uuid"
+    t.string "uuid", default: "da68a31d-612d-44c1-a96d-2ebb0917cf7a"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

@@ -61,7 +61,29 @@
                           p.font-weight-bold.card-text.text-right 
                             | $ 
                             = project.project_price
-                        
+      
+    .dropdown style="width:100px"
+      a#dLabel data-target="#" data-toggle="dropdown" href="#" role="button" 
+        = image_tag('bell.svg', class:"ml-2", style:"width:30px" )
+      ul.dropdown-menu.notifications aria-labelledby="dLabel" role="menu"
+        .notification-heading
+          h4.menu-title Notifications
+        li.divider
+        .notifications-wrapper
+          -if @notifications.present?
+            - @notifications.each do |k|
+              a.content href="#" 
+                .notification-item
+                  h4.item-title 
+                    =@name
+                    |  has sent you a message.
+                  p.item-info =k.created_at.strftime('%d-%m-%Y')
+                  p.item-info =k.created_at.strftime('%H:%M')
+          -else
+            a.content href="#" 
+              .notification-item
+                h4.item-title No Notification 
+                  
 javascript:
   $(function() {
     setTimeout(function(){
