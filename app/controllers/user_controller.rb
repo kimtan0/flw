@@ -121,11 +121,9 @@ class UserController < ApplicationController
       @available_deadline = 0
     end
 
-    if cookies[:user_uuid].present?
-      user = User.find_by(uuid: cookies[:user_uuid])
-      if user.id == @project.project_owner_id
-        @user_status = TRUE
-      end
+    user = User.find_by(uuid: cookies[:user_uuid])
+    if cookies[:user_uuid].present? && user.id.to_i == @project.project_owner_id.to_i
+      @user_status = "true"
     end
 
     pm = ProjectMilestone.find_by(project_id: params[:id])
