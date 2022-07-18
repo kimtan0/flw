@@ -94,7 +94,8 @@ class UserController < ApplicationController
   
   def project_details
     @project = Project.find(params[:id])
-    @deadline = (@project.project_deadline - Date.today).to_i
+
+    
 
     if @project.project_acceptance_user_id.nil?
       @user = User.find(@project.project_owner_id)
@@ -119,6 +120,12 @@ class UserController < ApplicationController
       @available_deadline = (@project.project_available_deadline - Date.today).to_i
     else
       @available_deadline = 0
+    end
+
+    if (@project.project_deadline - Date.today).to_i > 0
+      @deadline = (@project.project_deadline - Date.today).to_i
+    else
+      @deadline = 0
     end
 
     user = User.find_by(uuid: cookies[:user_uuid])

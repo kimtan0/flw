@@ -54,7 +54,7 @@ class HomeController < ApplicationController
       cookies[:user_uuid] = user.uuid
       redirect_to user_Index_path, flash: { info: "User has logged in" }
     elsif admin.present? && admin.authenticate(params[:password])
-      cookies[:admin_id] = admin.id
+      cookies[:admin_uuid] = admin.uuid
       redirect_to admin_index_path, flash: { info: "User has logged in" }
 
     else
@@ -65,8 +65,8 @@ class HomeController < ApplicationController
   def logout
     if cookies[:user_uuid].present?
       cookies.delete :user_uuid
-    elsif cookies[:admin_id].present?  
-      cookies.delete :admin_id
+    elsif cookies[:admin_uuid].present?  
+      cookies.delete :admin_uuid
     end
     redirect_to root_path
   end
