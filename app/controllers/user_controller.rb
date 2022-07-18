@@ -26,12 +26,14 @@ class UserController < ApplicationController
       cookies.delete :project_category
     end
 
-    if cookies[:user_id].present?
-      notifications = UserNotification.where(user_id: cookies[:user_id]).order(created_at: :desc).limit(20)
-      noti = UserNotification.find_by(user_id: cookies[:user_id])
+
+    if cookies[:user_uuid].present?
+      user = User.find_by(uuid: cookies[:user_uuid])
+      notifications = UserNotification.where(user_id: user.id).order(created_at: :desc).limit(20)
+      noti = UserNotification.find_by(user_id: user.id)
       if !notifications.blank?
         @notifications = notifications
-        user = User.find(noti.id)
+        user = User.find(noti.user_id)
         @name = user.first_name.to_s + " " + user.last_name.to_s
       end
     end
@@ -51,7 +53,8 @@ class UserController < ApplicationController
   def create
     project_price = (params[:project][:project_price]).to_i
     deposit_amount = project_price *10 / 100
-    credit = Credit.find_by(user_id: cookies[:user_id])
+    user = User.find_by(uuid: cookies[:user_uuid])
+    credit = Credit.find_by(user_id: user.id)
     credit_balance  = credit.balance
 
     if credit_balance <= deposit_amount
@@ -70,7 +73,7 @@ class UserController < ApplicationController
     end
     
     @project = Project.new(project_params.to_h.merge(
-      project_owner_id: cookies[:user_id], 
+      project_owner_id: user.id, 
       project_date: Time.now.strftime("%Y-%m-%d"), 
       project_category: cookies[:project_category], 
       project_detailed_category: params[:projectDetaildCategory].downcase,
@@ -118,8 +121,11 @@ class UserController < ApplicationController
       @available_deadline = 0
     end
 
-    if cookies[:user_id].present? && cookies[:user_id] == @project.project_owner_id
-      @user_status = TRUE
+    if cookies[:user_uuid].present?
+      user = User.find_by(uuid: cookies[:user_uuid])
+      if user.id == @project.project_owner_id
+        @user_status = TRUE
+      end
     end
 
     pm = ProjectMilestone.find_by(project_id: params[:id])
@@ -129,7 +135,8 @@ class UserController < ApplicationController
 
   def accept_project
     project = Project.find(params[:id])
-    project.update(project_status: "In Progress", project_acceptance_user_id: cookies[:user_id])
+    user = User.find_by(uuid: cookies[:user_uuid])
+    project.update(project_status: "In Progress", project_acceptance_user_id: user.id)
     redirect_to user_Index_path, flash: { info: "Project has been accepted" }
   end
 
@@ -175,6 +182,7 @@ class UserController < ApplicationController
   end
 
   def bid
+    user = User.find_by(uuid: cookies[:user_uuid])
     project = Project.find_by(id: params[:projectId])
     credit = Credit.find_by(user_id: project.project_owner_id)
     project_price = project.project_price
@@ -182,17 +190,17 @@ class UserController < ApplicationController
     preprocess_project_new_price_10 = (params[:project_price]).to_i
     project_new_price_10 = preprocess_project_new_price_10 *10 /100
     credit.update(balance: credit.balance + project_original_price_10 - project_new_price_10, fixed_balance: credit.fixed_balance - project_original_price_10 + project_new_price_10)
-    project.update(project_price: params[:project_price], project_acceptance_user_id: cookies[:user_id])
+    project.update(project_price: params[:project_price], project_acceptance_user_id: user.id)
     redirect_to user_Index_path, flash: { info: "Successfully bid on Project" }
   end
 
   def my_project
-    @user = User.find(cookies[:user_id]) 
-    @project = Project.where(project_owner_id: cookies[:user_id])
+    @user = User.find_by(uuid: cookies[:user_uuid]) 
+    @project = Project.where(project_owner_id: @user.id)
   end
 
   def my_account
-    @user = User.find(cookies[:user_id])
+    @user = User.find_by(uuid: cookies[:user_uuid])
     credit = Credit.find_by(user_id: @user.id)
     balance = credit.balance.to_s
     fixed_balance = credit.fixed_balance.to_s
@@ -203,7 +211,8 @@ class UserController < ApplicationController
   end
 
   def my_accepted_project
-    @project = Project.where(project_acceptance_user_id: cookies[:user_id])
+    user = User.find_by(uuid: cookies[:user_uuid])
+    @project = Project.where(project_acceptance_user_id: user.id)
   end
 
   def accepted_project_details
@@ -349,7 +358,7 @@ class UserController < ApplicationController
   end
 
   def topup
-    @user = User.find(cookies[:user_id])
+    @user = User.find_by(uuid: cookies[:user_uuid])
     credit = Credit.find_by(user_id: @user.id)
     balance = credit.balance.to_s
     fixed_balance = credit.fixed_balance.to_s
@@ -358,7 +367,7 @@ class UserController < ApplicationController
   end
 
   def top_up_process
-    user = User.find(cookies[:user_id])
+    user = User.find_by(uuid: cookies[:user_uuid])
     name = user.first_name + " " + user.last_name
     amount = params[:amount].to_i
     amount = amount *100
@@ -416,8 +425,9 @@ class UserController < ApplicationController
   end
 
   def customer_service_request
+    user = User.find_by(uuid: cookies[:user_uuid])
     csr = CustomerServiceRequest.new(request_params.to_h.merge(
-      user_id: cookies[:user_id],
+      user_id: user.id,
       title: cookies[:request_title]
     ))
     csr.save
@@ -428,7 +438,7 @@ class UserController < ApplicationController
 
   def chat
     @target_user = User.find(params[:id])
-    @name = User.find(cookies[:user_id]).first_name
+    @name = User.find_by(uuid: cookies[:user_uuid]).first_name
   end
 
   def notification
@@ -447,7 +457,7 @@ class UserController < ApplicationController
   end
   
   def check_user
-    if !cookies[:user_id].present?
+    if !cookies[:user_uuid].present?
       redirect_to home_login_path
     end
   end
@@ -458,7 +468,8 @@ class UserController < ApplicationController
         uri = URI.parse("https://dev.toyyibpay.com/index.php/api/getBillTransactions")
         http = Net::HTTP.post_form(uri, 'billCode' => params[:billcode])
         billTransaction = JSON.parse(http.body)
-        user_credit = Credit.find_by(user_id: cookies[:user_id])
+        user = User.find_by(uuid: cookies[:user_uuid])
+        user_credit = Credit.find_by(user_id: user.id)
         user_credit.update(balance: user_credit.balance + (billTransaction[0]["billpaymentAmount"]).to_f)
         cookies[:topup_status] = "0"
       elsif params[:status_id] == "3"
@@ -468,7 +479,7 @@ class UserController < ApplicationController
   end
 
   def chat_presence
-    @user_uuid = User.find(cookies[:user_id]).uuid
+    @user_uuid = cookies[:user_uuid]
     @publishKey = "pub-c-6c775362-cd2d-4b19-a805-6953eff53cb3"
     @subscribeKey = "sub-c-c8723627-07b7-4f78-9658-ccc6d78723db"
   end

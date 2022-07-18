@@ -19,8 +19,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js"></script>
-
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.1.2.js"></script>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.1.2.min.js"></script>
 
     <%= stylesheet_link_tag :homepage %>
     <%= stylesheet_link_tag :user %>
@@ -29,9 +29,9 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%url = request.path_info%>
 
-    <% if url.include?('user') && cookies[:user_id].present? =%>
+    <% if url.include?('user') && cookies[:user_uuid].present? =%>
       <%= render partial: "layouts/user_header" %>
-    <% elsif cookies[:user_id].present?%>
+    <% elsif cookies[:user_uuid].present?%>
       <%= render partial: "layouts/user_header" %>
     <% elsif cookies[:admin_id].present?%>
       <%= render partial: "layouts/admin_header" %>

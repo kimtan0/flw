@@ -20,7 +20,7 @@ class HomeController < ApplicationController
     phone_number = params[:phone_number]
 
     if password == confirm_password
-      @user = User.new(user_params.to_h.merge(password: password, phone_number: phone_number, reference_code: SecureRandom.hex(5)))
+      @user = User.new(user_params.to_h.merge(password: password, phone_number: phone_number, reference_code: SecureRandom.hex(5), uuid: SecureRandom.uuid))
       if phone_number.length == 11
         if user_account.blank? && admin_accont.blank?
           @user.save
@@ -51,7 +51,7 @@ class HomeController < ApplicationController
     user = User.find_by(email: params[:email])
     admin = Admin.find_by(email: params[:email])
     if user.present? && user.authenticate(params[:password])
-      cookies[:user_id] = user.id
+      cookies[:user_uuid] = user.uuid
       redirect_to user_Index_path, flash: { info: "User has logged in" }
     elsif admin.present? && admin.authenticate(params[:password])
       cookies[:admin_id] = admin.id
@@ -63,9 +63,8 @@ class HomeController < ApplicationController
   end
 
   def logout
-    if cookies[:user_id].present?
-      cookies.delete :user_id
-      cookies.delete :user_role
+    if cookies[:user_uuid].present?
+      cookies.delete :user_uuid
     elsif cookies[:admin_id].present?  
       cookies.delete :admin_id
     end
@@ -73,13 +72,13 @@ class HomeController < ApplicationController
   end
 
   def edit
-    @user = User.find(cookies[:user_id])
+    @user = User.find_by(uuid: cookies[:user_uuid])
 
   end
 
   def save
     user_account = User.find_by(email: params[:user][:email])
-    user = User.find(cookies[:user_id])
+    user = User.find_by(uuid: cookies[:user_uuid])
     phone_number = params[:phone_number]
 
     if phone_number.length == 11
@@ -140,7 +139,7 @@ class HomeController < ApplicationController
     new_password = params[:new_password]
     confirm_new_password = params[:confirm_new_password]
     if new_password == confirm_new_password
-      user = User.find(cookies[:user_id])
+      user = User.find_by(uuid: cookies[:user_uuid])
       if user.authenticate(params[:password])
         user.update(password: params[:new_password])
         redirect_to user_my_account_path, flash: {info: "Password has been updated."}
