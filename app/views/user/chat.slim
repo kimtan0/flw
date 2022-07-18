@@ -1,41 +1,29 @@
-
-//h1 kek
-//input#inp type="text" name="dsa"
-//button.navbar-toggler.sub-header-toggler.w-50.text-left.sub-header-button.py-2 style="background-color:#7af2ba" onclick="functionToExecute()" BTN
-//textarea#txtarea name="test" cols="30" rows="10" 
-
-//button.btn.btn-dark.btn-outline-secondary.h3-homepage.px-3.px-md-4#frontend-image-submit style="border-radius: 0px 12px 12px 0px; color: white;" type="button" Choose
-//= file_field_tag "image", accept: 'image/jpeg, image/png', class: 'btn', id: 'image_submit', style:"display:none"
-
-
-
 .w-100
   .d-flex.justify-content-center
-    .sub-header-width
-      .padding
-        .row.container.d-flex.justify-content-center
-          .col-md-6
-            .card.card-bordered
-              .card-header
-                h4.card-title.mt-2
-                  strong 
-                    - name = @target_user.first_name.to_s + " " + @target_user.last_name.to_s
-                    =name
-                  i.bi.bi-circle-fill.ml-2#status style="color:grey"
-              .ps-container.ps-theme-default.ps-active-y#chat-content style=("overflow-y: scroll !important; height:400px !important;") 
-                .ps-scrollbar-x-rail style=("left: 0px; bottom: 0px;") 
-                  .ps-scrollbar-x style=("left: 0px; width: 0px;") tabindex="0" 
-                .ps-scrollbar-y-rail style=("top: 0px; height: 0px; right: 2px;") 
-                  .ps-scrollbar-y style=("top: 0px; height: 2px;") tabindex="0" 
-              .publisher.bt-1.border-light
-                img.avatar.avatar-xs alt="..." src="https://img.icons8.com/color/36/000000/administrator-male.png" /
-                input.publisher-input#inp placeholder=("Write something") type="text" /
-                span.publisher-btn.file-group
-                  i.fa.fa-paperclip.file-browser
-                  input type="file"
-                button.btn.btn-xs.btn-secondary onclick="functionToExecute()" data-abc="true" href="#"  Send
-                
+    .py-5
+      .row.container.d-flex.justify-content-center
+        .col-12
+          .card.card-bordered
+            .card-header
+              h4.card-title.mt-2
+                strong 
+                  - name = @target_user.first_name.to_s + " " + @target_user.last_name.to_s
+                  =name
+                i.bi.bi-circle-fill.ml-2#status style="color:grey"
+            .ps-container.ps-theme-default.ps-active-y#chat-content style=("overflow-y: scroll !important; height:400px !important;") 
+              .ps-scrollbar-x-rail style=("left: 0px; bottom: 0px;") 
+                .ps-scrollbar-x style=("left: 0px; width: 0px;") tabindex="0" 
+              .ps-scrollbar-y-rail style=("top: 0px; height: 0px; right: 2px;") 
+                .ps-scrollbar-y style=("top: 0px; height: 2px;") tabindex="0" 
+            .publisher.bt-1.border-light
+              img.avatar.avatar-xs alt="..." src="https://img.icons8.com/color/36/000000/administrator-male.png" /
+              input.publisher-input#inp placeholder=("Write something") type="text" /
+              button.btn.btn-attach#frontend-image-submit type="button"
+                = image_tag('paperclip.svg', class:"ml-2")
+              = file_field_tag "image", class: 'btn', id: 'image_submit', style: "display:none"
+              button.btn.btn-xs.btn-secondary onclick="functionToExecute()" data-abc="true" href="#"  Send
 
+        
 javascript:
 
   var pubnub = new PubNub({
@@ -50,7 +38,6 @@ javascript:
   });
 
 
-
   //Event Listener listens to all message that you are subscribed to
 
   var chatContent = document.getElementById('chat-content');
@@ -58,21 +45,28 @@ javascript:
   
   pubnub.addListener({
     message: function(receivedMessage) {
-        
+
       if("#{@user_uuid}" == receivedMessage.userMetadata.uuid){
         my_html = '<div class="media media-chat media-chat-reverse"> <div class="media-body"> <p>' +  receivedMessage.message.text + '</p> </div> </div>'
         chatContent.innerHTML += my_html;
         my_html = '';
-
       }else{
         my_html = '<div class="media media-chat"> <div class="media-body"> <p>' +  receivedMessage.message.text + '</p> </div> </div>'
         chatContent.innerHTML += my_html;
         my_html = '';
       }
-
     },
     file: function(f){
-      console.log(f.file.url);
+
+      if("#{@user_uuid}" == f.publisher){
+        my_html = '<div class="media media-chat media-chat-reverse"> <div class="media-body text-right"> <a href= ' + f.file.url +' target="_blank">' +  f.file.url + '</a> </div> </div>'
+        chatContent.innerHTML += my_html;
+        my_html = '';
+      }else{
+        my_html = '<div class="media media-chat"> <div class="media-body text-left"> <a href= ' + f.file.url +' target="_blank">' +  f.file.url + '</a> </div> </div>'
+        chatContent.innerHTML += my_html;
+        my_html = '';
+      }
     }
   });
 
@@ -88,7 +82,6 @@ javascript:
 
     for (let i = 0; i < length; i++) {
       if (arr[i].uuid != "#{@user_uuid}"){
-        console.log("Other person is online");
         document.getElementById('status').style = "color: #1DBF73"
       }
     }
@@ -96,7 +89,6 @@ javascript:
   );
 
   
-
   //Publishes/Sends the message to the channel
   function functionToExecute(){
     var input = document.getElementById('inp');
@@ -126,68 +118,18 @@ javascript:
     });
   }
 
-  
 
-  
-  /*
-  image_submit.onchange = evt => {
-    const [file] = image_submit.files
-    if (file) {
-      
-      //img.src = URL.createObjectURL(file)
-      //upload.value = file.name
+  const input = document.querySelector('#image_submit');
 
-      pubnub.sendFile({
-        channel: 'my_channel',
-        file: file.name,
-      })
-
-    }
-  }
+  input.addEventListener('change', async () => {
+    const file = input.files[0];
+    const result = await pubnub.sendFile({
+      channel: 'my_channel',
+      file: file,
+    });
+  });
 
 
   $('#frontend-image-submit').click(function() {
     $('#image_submit').trigger('click');
   });
-  */
-
-
-
-    
-  
-
-
-
-
-  /*
-  pubnub.objects.setUUIDMetadata({
-    uuid: "#{@user_uuid}",
-    data: {
-        name: "#{@user_uuid}",
-        email: "johndoe@pubnub.com"
-    }
-  });*/
-  
-  // console.log(pubnub.objects.getUUIDMetadata())
-
-
-  //Retrieve the last 100 messages from my_channel
-  /*
-  pubnub.fetchMessages(
-  {
-    channels: ["my_channel"],
-    end: '20578961574918620',
-    count: 25
-  },
-  function(status, response) {
-    //var log = status.text + ": " + response;
-
-    console.log(status, response);
-    //textarea2.value += log;
-
-  }
-  );*/
-
-
-
- 

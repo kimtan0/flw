@@ -18,18 +18,12 @@
   max-height:90px;
 }
 
-.skin-dna-box{
-  width:15em;
-  height:12em;
-}
 
 .skin-details{
   display:flex;
 }
 
-.skin-dna-indicator{
-  height: 10px
-}
+
 
 #skin-dna-indicator-left{
   padding-right: 4px;
@@ -280,10 +274,6 @@ table .custom-check-input[type="checkbox"] {
     box-shadow: 0 2px 3px rgba(0,0,0,0.03);
     -webkit-transition: .5s;
     transition: .5s;
-}
-
-.padding {
-    padding: 3rem !important
 }
 
 
@@ -633,7 +623,10 @@ background:#ccc;
 border-radius:4px;
 }
 
-
+.btn-attach:focus:not(:focus-visible){
+  outline: none;
+  box-shadow: none;
+}
 
 @media screen and (max-width: 1680px) {
 
@@ -668,10 +661,6 @@ border-radius:4px;
     width:12%;
   }
 
-  .skin-dna-box{
-    width:18em;
-    height:12em;
-  }
 
   .h2-dashboard-height{
     height:60px
@@ -705,14 +694,8 @@ border-radius:4px;
     width:14%;
   }
 
-  .skin-dna-box{
-    width:16em;
-    height:11em;
-  }
 
-  .skin-dna-indicator{
-    height: 9px
-  }
+
 
 }
 
@@ -743,10 +726,6 @@ border-radius:4px;
     line-height: 24px;
   }
 
-  .skin-dna-box{
-    width:14em;
-    height:10em;
-  }
 
   .profile-picture{
     max-width:50px; 
@@ -761,9 +740,7 @@ border-radius:4px;
     width:15%;
   }
 
-  .skin-dna-indicator{
-    height: 8px
-  }
+
 
   #triangle-down{
     border-left: 8px solid transparent;
@@ -810,14 +787,8 @@ border-radius:4px;
     width:18%;
   }
 
-  .skin-dna-box{
-    width:12.5em;
-    height:9em;
-  }
 
-  .skin-dna-indicator{
-    height: 7px
-  }
+
 
   #triangle-down{
     border-left: 7px solid transparent;
@@ -877,14 +848,8 @@ border-radius:4px;
     line-height: 18px;
   }
 
-  .skin-dna-box{
-    width:12em;
-    height:9em;
-  }
 
-  .skin-dna-indicator{
-    height: 6px
-  }
+
 
   .h2-dashboard-height{
     height:30px
@@ -922,15 +887,6 @@ border-radius:4px;
 
   .logo-container{
     width:13%;
-  }
-
-  .skin-dna-box{
-    width:10em;
-    height:8em;
-  }
-
-  .skin-dna-indicator{
-    height: 5px
   }
 
   #triangle-down{
