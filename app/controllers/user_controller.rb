@@ -74,7 +74,6 @@ class UserController < ApplicationController
     
     @project = Project.new(project_params.to_h.merge(
       project_owner_id: user.id, 
-      project_date: Time.now.strftime("%Y-%m-%d"), 
       project_category: cookies[:project_category], 
       project_detailed_category: params[:projectDetaildCategory].downcase,
       NDA: nda
@@ -376,7 +375,7 @@ class UserController < ApplicationController
     name = user.first_name + " " + user.last_name
     amount = params[:amount].to_i
     amount = amount *100
-    bill_generator("Product Order", "Non Premade Product", amount, name, user.email, user.phone_number)
+    bill_generator("Email to user", "Email Title", amount, name, user.email, user.phone_number)
   end
 
   def bill_url(billcode)
@@ -407,7 +406,6 @@ class UserController < ApplicationController
       'billChargeToCustomer'=>1
     )
     billCode = JSON.parse(http.body)
-    puts billCode
     bill_url(billCode[0]["BillCode"])
   end
 

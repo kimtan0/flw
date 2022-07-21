@@ -16,7 +16,6 @@ class HomeController < ApplicationController
     confirm_password = params[:confirm_password]
     user_account = User.find_by(email: params[:user][:email])
     admin_accont = Admin.find_by(email: params[:user][:email])
-    role = params[:role]
     phone_number = params[:phone_number]
 
     if password == confirm_password

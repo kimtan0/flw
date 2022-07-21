@@ -156,22 +156,7 @@
     font-size: 1.5em;
   }
 }
-.h2-checkout{
-  font-family: 'Roboto', sans-serif;
-  font-size: 2.0em;
-  font-style: bold;
-  font-weight: 1000;
-}
-.h2-checkout-mt{
-  margin-top:7rem
-}
-.img-ellipse-2 {
-  padding-bottom: 4px;
-}
-.td-small-gap td {
-  padding-bottom: 0 !important;
-  padding-top: 3px !important;
-}
+
 .pink-line-box {
   width: 91%;
   border-bottom: thick solid #ba6976 !important;
@@ -385,9 +370,7 @@ abbr{
   .yellow-background-color{
     background: rgba(255,221,103, 0.3);
   }
-  .h2-checkout{
-    font-size: 1.8em;
-  }
+
 
   .navbar-logo {
     height: 74px;
@@ -451,9 +434,6 @@ abbr{
   }
   .container-login{
     width: 40%;
-  }
-  .h2-checkout{
-    font-size: 1.5em;
   }
   .bg-img {
     background-position: 100%;
@@ -548,15 +528,6 @@ abbr{
   #login-header{
     font-size: 2em;
   }
-  .h2-checkout{
-    font-size: 1.4em;
-  }
-  .h2-checkout-mt{
-    margin-top:5rem
-  }
-  .td-ellipse-2 {
-    padding-bottom: 0.25rem !important;
-  }
 
   .img-human-modal {
     height: 73%;
@@ -626,16 +597,6 @@ abbr{
   #login-header{
     font-size: 1.9em;
   }
-  .h2-checkout{
-    font-size: 1.2em;
-  }
-  .h2-checkout-mt{
-    margin-top:4rem
-  }
-  .td-ellipse-2 {
-    padding-bottom: 0 !important;
-  }
-
   .countdown-bg-white {
     background: rgba(255, 255, 255, 0.5);
   }
@@ -711,15 +672,7 @@ abbr{
   #login-header{
     font-size: 1.8em;
   }
-  .h2-checkout{
-    font-size: 1.0em;
-  }
-  .h2-checkout-mt{
-    margin-top:3rem
-  }
-  .td-ellipse-2 {
-    padding-bottom: 0 !important;
-  }
+
 
   input.p-homepage {
     height: calc(1.5em + 1rem + 2px);
@@ -847,20 +800,6 @@ abbr{
   #login-header{
     font-size: 1.8em;
   }
-  .h2-checkout{
-    font-size: 1.0em;
-  }
-  .td-ellipse-2 {
-    padding-bottom: 0 !important;
-    &.td-ellipse-2-text {
-      padding-top: 0.8rem;
-      padding-left: 0.5rem;
-    }
-  }
-  .img-ellipse-2 {
-    padding-bottom: 0;
-    width: 90%;
-  }
 
   .h2-about{
     font-size: 0.95em;
@@ -874,15 +813,6 @@ abbr{
     width: 95%;
     align-items: center;
     padding-right: 0 !important;
-  }
-  .td-small-gap {
-    .img-ellipse-2 {
-      padding-bottom: 0;
-      width: 55%;
-    }
-    .td-ellipse-2-text {
-      padding-left: 0rem;
-    }
   }
 
   .bg-img {
