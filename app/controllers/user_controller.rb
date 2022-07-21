@@ -384,7 +384,8 @@ class UserController < ApplicationController
     redirect_to url
   end
 
-
+  #https://freelancer-kim1.herokuapp.com/user/my_account
+  #http://localhost:3000/user/my_account
   def bill_generator(bill_name, bill_description, amount, name, email, phone_number)
 
     uri = URI.parse("https://dev.toyyibpay.com/index.php/api/createBill")
