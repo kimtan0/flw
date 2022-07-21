@@ -348,6 +348,10 @@ class UserController < ApplicationController
 
   def profile
     @user = User.find(params[:id])
+    user = User.find_by(uuid: cookies[:user_uuid])
+    if @user.id != user.id
+      @not_user = "true"
+    end
     rating = Rating.find_by(user_id: params[:id])
     if rating.rating == 0 && rating.rating_count == 0
       @actual_rating = 0
