@@ -34,6 +34,9 @@ Rails.application.routes.draw do
   get 'admin/report_request_details/:id', to: "admin#report_request_details"
   post 'admin/report_request_details/:id', to: "admin#report_request_details", as: :report_request_details
   post 'admin/report_request_details', to: "admin#complete_report_request", as: :complete_report_request
+  get 'admin/email_user', to: "admin#email_user"
+  post 'admin/email_user', to: "admin#email_action", as: :email_action
+
 
   resources :admin
 

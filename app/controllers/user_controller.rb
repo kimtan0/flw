@@ -74,7 +74,6 @@ class UserController < ApplicationController
     
     @project = Project.new(project_params.to_h.merge(
       project_owner_id: user.id, 
-      project_date: Time.now.strftime("%Y-%m-%d"), 
       project_category: cookies[:project_category], 
       project_detailed_category: params[:projectDetaildCategory].downcase,
       NDA: nda
@@ -94,7 +93,8 @@ class UserController < ApplicationController
   
   def project_details
     @project = Project.find(params[:id])
-    @deadline = (@project.project_deadline - Date.today).to_i
+
+    
 
     if @project.project_acceptance_user_id.nil?
       @user = User.find(@project.project_owner_id)
@@ -121,11 +121,15 @@ class UserController < ApplicationController
       @available_deadline = 0
     end
 
-    if cookies[:user_uuid].present?
-      user = User.find_by(uuid: cookies[:user_uuid])
-      if user.id == @project.project_owner_id
-        @user_status = TRUE
-      end
+    if (@project.project_deadline - Date.today).to_i > 0
+      @deadline = (@project.project_deadline - Date.today).to_i
+    else
+      @deadline = 0
+    end
+
+    user = User.find_by(uuid: cookies[:user_uuid])
+    if cookies[:user_uuid].present? && user.id.to_i == @project.project_owner_id.to_i
+      @user_status = "true"
     end
 
     pm = ProjectMilestone.find_by(project_id: params[:id])
@@ -371,7 +375,7 @@ class UserController < ApplicationController
     name = user.first_name + " " + user.last_name
     amount = params[:amount].to_i
     amount = amount *100
-    bill_generator("Product Order", "Non Premade Product", amount, name, user.email, user.phone_number)
+    bill_generator("Email to user", "Email Title", amount, name, user.email, user.phone_number)
   end
 
   def bill_url(billcode)
@@ -402,7 +406,6 @@ class UserController < ApplicationController
       'billChargeToCustomer'=>1
     )
     billCode = JSON.parse(http.body)
-    puts billCode
     bill_url(billCode[0]["BillCode"])
   end
 

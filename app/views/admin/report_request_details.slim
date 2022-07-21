@@ -1,3 +1,10 @@
+- flash.each do |type, msg|
+  -if type == "notice" 
+    .alert.alert-danger.mt-4
+      = msg
+  -else
+    .alert.alert-success.mt-4
+      = msg
 .d-flex.flex-column.min-vh-100.justify-content-center.align-items-center 
   .w-100.mb-5
     .row.row-homepage
@@ -9,13 +16,24 @@
               h1.h2-homepage.pl-0.pb-0#login-header style="text-align:center" =@report_request.title
               p.h3-homepage.mt-5 
                 | User: 
-                =@user.first_name + " " + @user.last_name
+                - name = @user.first_name + " " + @user.last_name
+                = link_to name, admin_profile_path(:id => @user.id), class: "profile-link"
               p.h3-homepage.mt-5 =@report_request.description
               .d-flex.flex-column.justify-content-center.align-items-center
                 .row 
                   .col-6
                       = simple_form_for :complete, url: complete_report_request_path(:id => @report_request), method: "POST" do |f|
-                        = f.submit "Confirm", data: { confirm: 'Are you certain this request has been completed?' }, class: "btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3 mr-2", style: "border-radius: 12px; color: white; background-color:#80d144"
-                  .col-6
+                        = f.submit "Close Request", data: { confirm: 'Are you certain this request has been completed?' }, class: "btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3 mr-2", style: "border-radius: 12px; color: white; background-color:#80d144"
+                  .col-1
+                  .col-5
+                    = link_to 'Email User', admin_email_user_path(:id => @user.id), class: 'btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3 mr-2', style: 'border-radius: 12px; color: white; background-color:#80d144'
+                  .col-12
                     = link_to 'Back', admin_report_request_path, class: 'btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3 mr-2', style: 'border-radius: 12px; color: white; background-color:#80d144'                  
       .col-2.col-sm-3
+
+javascript:
+  $(function() {
+    setTimeout(function(){
+      $('.alert').slideUp(500);
+    }, 2000);
+  });

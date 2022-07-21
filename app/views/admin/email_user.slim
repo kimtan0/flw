@@ -1,0 +1,31 @@
+- flash.each do |type, msg|
+  -if type == "notice" 
+    .alert.alert-danger.mt-4
+      = msg
+  -else
+    .alert.alert-success.mt-4
+      = msg
+.d-flex.flex-column.min-vh-100.justify-content-center.align-items-center
+  .w-100.mb-5
+    .row.row-homepage
+      .col-2.col-sm-3
+      .col-8.col-sm-6.p-4.p-sm-5.p-lg-4.p-xl-5.pb-0.pb-sm-0.pb-lg-4.pb-xl-5
+        .table.mb-0.d-flex.justify-content-center.align-items-center
+          .row.row-homepage style="vertical-align:middle"
+            .col-12.mb-3.mb-sm-4.mb-lg-5
+              h1.h2-homepage.pl-0.pb-0#login-header.mt-5 style="text-align:center" Email User
+            .col-12
+              .row.row-homepage.p-0
+                = form_tag(email_action_path(:id => @id), method: :post)
+                  .col-12
+                    .input-group 
+                      = text_area_tag "EmailContent",nil, placeholder: 'Email Content', cols:10, rows:5, required:TRUE ,class: "form-control form-control-lg p-homepage mb-2 mb-sm-3 checkout-input", style: "border-radius:12px"
+                  .col-12
+                    = submit_tag "Send Email", class: "btn h3-homepage px-3 px-md-5 py-3 py-md-3 mt-3 mr-2", style: "border-radius: 12px; color: white; background-color:#80d144"
+      .col-2.col-sm-3
+javascript:
+  $(function() {
+    setTimeout(function(){
+      $('.alert').slideUp(500);
+    }, 2000);
+  });

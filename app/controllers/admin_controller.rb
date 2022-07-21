@@ -115,10 +115,20 @@ class AdminController < ApplicationController
     redirect_to admin_report_request_path, flash: { info: "Request has been completed" }
   end
 
+  def email_user  
+    @id = User.find(params[:id])
+  end
+
+  def email_action
+    email = User.find(params[:id]).email
+    HomepageMailer.with(email: email, content: params[:EmailContent]).email_user.deliver_now
+    redirect_to admin_email_user_path(:id => params[:id]), flash: { info: "Email has been sent to user." }
+  end
+
   private
 
   def check_admin
-    if !cookies[:admin_id].present?
+    if !cookies[:admin_uuid].present?
       redirect_to home_login_path
     end
   end

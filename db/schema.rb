@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_18_055112) do
+ActiveRecord::Schema.define(version: 2022_07_19_190145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2022_07_18_055112) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "uuid"
   end
 
   create_table "credits", force: :cascade do |t|
@@ -90,7 +91,6 @@ ActiveRecord::Schema.define(version: 2022_07_18_055112) do
 
   create_table "projects", force: :cascade do |t|
     t.string "project_name"
-    t.date "project_date"
     t.string "project_owner_id"
     t.string "project_type"
     t.string "project_description"
