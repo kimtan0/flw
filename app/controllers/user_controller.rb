@@ -221,7 +221,11 @@ class UserController < ApplicationController
 
   def accepted_project_details
     @project = Project.find(params[:id])
-    @deadline = (@project.project_deadline - Date.today).to_i
+    if (@project.project_deadline - Date.today).to_i > 0
+      @deadline = (@project.project_deadline - Date.today).to_i
+    else
+      @deadline = 0
+    end
     pm = ProjectMilestone.find_by(project_id: params[:id])
     @width = pm.project_milestone_percentage
     @description = pm.project_milestone_description
@@ -348,6 +352,10 @@ class UserController < ApplicationController
 
   def profile
     @user = User.find(params[:id])
+    user = User.find_by(uuid: cookies[:user_uuid])
+    if @user.id != user.id
+      @not_user = "true"
+    end
     rating = Rating.find_by(user_id: params[:id])
     if rating.rating == 0 && rating.rating_count == 0
       @actual_rating = 0
