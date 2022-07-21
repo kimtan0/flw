@@ -221,7 +221,11 @@ class UserController < ApplicationController
 
   def accepted_project_details
     @project = Project.find(params[:id])
-    @deadline = (@project.project_deadline - Date.today).to_i
+    if (@project.project_deadline - Date.today).to_i > 0
+      @deadline = (@project.project_deadline - Date.today).to_i
+    else
+      @deadline = 0
+    end
     pm = ProjectMilestone.find_by(project_id: params[:id])
     @width = pm.project_milestone_percentage
     @description = pm.project_milestone_description

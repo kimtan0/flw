@@ -41,7 +41,7 @@
               .col-1
             .col-12.col-sm-5.mb-5.mx-2.d-flex.justify-content-center.align-item-center
               .card.card-project-width.border-dark 
-                = link_to project_details_path(project.id), style:"text-decoration: none; color: black"
+                = link_to accepted_project_details_path(project.id), style:"text-decoration: none; color: black"
                   = image_tag (project.avatar), class:"card-img-top"
                   .card-body
                     .h2-homepage.dashboard-skin-content.project-title.card-title.mb-5 = project.project_name
